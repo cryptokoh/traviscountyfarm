@@ -501,6 +501,75 @@
         .tag.trending { background: var(--color-accent-subtle); color: var(--color-accent); }
         .tag.flagship { background: var(--color-primary-subtle); color: var(--color-primary-dark); }
 
+        /* Supplier Cards */
+        .supplier-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .supplier-item {
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+        }
+
+        .supplier-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+
+        .supplier-name {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .supplier-distance {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            background: var(--color-bg-muted);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+        }
+
+        .supplier-location {
+            font-size: var(--text-xs);
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .supplier-desc {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .supplier-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-primary);
+            transition: color var(--transition-fast);
+        }
+
+        .supplier-link:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .supplier-link::after {
+            content: '\2197';
+            font-size: 12px;
+        }
+
         /* Mobile product cards (hidden on desktop) */
         .overview-mobile {
             display: none;
@@ -1129,6 +1198,47 @@
                 <div class="callout">
                     <div class="callout-title">Austin Advantage</div>
                     <p>Austin's severe year-round allergy seasons (cedar fever Dec-Feb, oak Mar-May, ragweed Aug-Oct) create persistent local honey demand. Closest competitor Two Hives Honey charges $2.83-$3.33/oz. TCF at $1.13/oz is 63-66% below while maintaining artisan positioning. Even capturing 1% of Austin's premium honey segment equals $155K/year.</p>
+                </div>
+
+                <!-- Private Label Suppliers -->
+                <div class="info-card" style="border-left: 3px solid var(--color-primary); margin-top: var(--spacing-xl);">
+                    <div class="info-card-title" style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Texas Private Label Honey Suppliers
+                    </div>
+                    <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--spacing-md);">Closest dedicated private label partners for white label sourcing &amp; scale-up</p>
+
+                    <div class="supplier-list">
+                        <div class="supplier-item">
+                            <div class="supplier-header">
+                                <span class="supplier-name">Burleson's Honey</span>
+                                <span class="supplier-distance">~3 hrs north</span>
+                            </div>
+                            <div class="supplier-location">Waxahachie, TX</div>
+                            <p class="supplier-desc">Oldest & largest family-owned honey provider in the Southwest. In-house recipe blending, packaging, and label design. Best bet for a legit private label partner within Texas.</p>
+                            <a href="https://www.burlesons.com" target="_blank" rel="noopener" class="supplier-link">burlesons.com</a>
+                        </div>
+
+                        <div class="supplier-item">
+                            <div class="supplier-header">
+                                <span class="supplier-name">Honey Blossom USA</span>
+                                <span class="supplier-distance">~3 hrs north</span>
+                            </div>
+                            <div class="supplier-location">The Colony, TX</div>
+                            <p class="supplier-desc">Private label with low minimums. Certified organic and Non-GMO options available. Good fit for small-batch scaling.</p>
+                            <a href="https://www.honeyblossomusa.com" target="_blank" rel="noopener" class="supplier-link">honeyblossomusa.com</a>
+                        </div>
+
+                        <div class="supplier-item">
+                            <div class="supplier-header">
+                                <span class="supplier-name">Honey Solutions</span>
+                                <span class="supplier-distance">~2.5 hrs east</span>
+                            </div>
+                            <div class="supplier-location">Baytown, TX</div>
+                            <p class="supplier-desc">Industrial-scale supplier with 7 consecutive years of AA BRC food safety scores. Better suited for large-scale operations and volume scaling.</p>
+                            <a href="https://www.honeysolutions.com" target="_blank" rel="noopener" class="supplier-link">honeysolutions.com</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
