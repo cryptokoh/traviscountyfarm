@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Block ALL search engines and crawlers -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="bingbot" content="noindex, nofollow">
+
+    <title>TCF Market Research</title>
+
+    <!-- No OG/Twitter tags intentionally - prevent social media previews -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ============================================
+           Research Page Styles
+           ============================================ */
+
+        .research-page {
+            padding-top: calc(var(--nav-height) + var(--spacing-3xl));
+            padding-bottom: var(--spacing-4xl);
+        }
+
+        .research-hero {
+            text-align: center;
+            padding: var(--spacing-3xl) 0;
+            margin-bottom: var(--spacing-3xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .research-hero .section-subtitle {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .research-hero p {
+            color: var(--color-text-muted);
+            font-size: var(--text-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Stat Cards Row */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--color-primary);
+        }
+
+        .stat-card-number {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1.2;
+        }
+
+        .stat-card-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-xs);
+        }
+
+        .stat-card-sub {
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-xs);
+        }
+
+        /* Section Blocks */
+        .research-section {
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .research-section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--color-primary-subtle);
+        }
+
+        .research-section-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-primary-subtle);
+            border-radius: var(--radius-lg);
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+
+        .research-section-title {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .research-section-price {
+            margin-left: auto;
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            background: var(--color-primary-subtle);
+            padding: var(--spacing-xs) var(--spacing-lg);
+            border-radius: var(--radius-full);
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--spacing-xl);
+            font-size: var(--text-sm);
+        }
+
+        .data-table thead th {
+            text-align: left;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--color-bg-alt);
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .data-table tbody td {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border-light);
+            color: var(--color-text-secondary);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--color-primary-subtle);
+        }
+
+        .data-table .highlight {
+            font-weight: 600;
+            color: var(--color-primary-dark);
+        }
+
+        .data-table .number {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Info Grid (2-col layout within sections) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .info-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+        }
+
+        .info-card-title {
+            font-family: var(--font-serif);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .info-card p, .info-card li {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .info-card ul {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            list-style: none;
+        }
+
+        .info-card li::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            margin-right: var(--spacing-sm);
+            vertical-align: middle;
+        }
+
+        /* Bar Charts */
+        .bar-chart {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .bar-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            width: 160px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 28px;
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing-md);
+            transition: width 1s ease;
+        }
+
+        .bar-fill.gold { background: var(--gradient-primary); }
+        .bar-fill.sage { background: linear-gradient(135deg, #6b7c5e 0%, #8a9e7a 100%); }
+        .bar-fill.terra { background: linear-gradient(135deg, #b5684a 0%, #cc8268 100%); }
+        .bar-fill.purple { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+
+        .bar-value {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .bar-value-outside {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-left: var(--spacing-sm);
+            white-space: nowrap;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            background: var(--color-primary-subtle);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .callout-title {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .callout p {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .callout.accent {
+            background: var(--color-accent-subtle);
+            border-left-color: var(--color-accent);
+        }
+
+        .callout.accent .callout-title {
+            color: var(--color-accent);
+        }
+
+        /* Revenue Model Section */
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .revenue-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .revenue-card-tier {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .revenue-card-amount {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.2;
+        }
+
+        .revenue-card-period {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .revenue-card-details {
+            font-size: var(--text-xs);
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .revenue-card.featured {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 1px var(--color-primary);
+            position: relative;
+        }
+
+        .revenue-card.featured::before {
+            content: 'Target';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-primary);
+            color: white;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Vertical Integration Diagram */
+        .vi-diagram {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .vi-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .vi-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .vi-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.2;
+            padding: var(--spacing-xs);
+        }
+
+        .vi-circle.source {
+            background: var(--color-primary-subtle);
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary-dark);
+        }
+
+        .vi-circle.product {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .vi-price {
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .vi-connector {
+            color: var(--color-text-muted);
+            font-size: var(--text-xl);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Advantages Grid */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .advantage-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+        }
+
+        .advantage-number {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .advantage-title {
+            font-family: var(--font-serif);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .advantage-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Divider */
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--spacing-3xl) 0;
+        }
+
+        /* Badge Tags */
+        .tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag.growth { background: #dcfce7; color: #166534; }
+        .tag.trending { background: var(--color-accent-subtle); color: var(--color-accent); }
+        .tag.flagship { background: var(--color-primary-subtle); color: var(--color-primary-dark); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stat-cards { grid-template-columns: repeat(2, 1fr); }
+            .revenue-grid { grid-template-columns: 1fr; }
+            .advantage-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .stat-cards { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .bar-label { width: 100px; font-size: var(--text-xs); }
+            .research-section-header { flex-wrap: wrap; }
+            .research-section-price { margin-left: 0; margin-top: var(--spacing-sm); }
+            .vi-row { gap: var(--spacing-md); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation (minimal - no links to main site sections) -->
+    <nav class="nav scrolled">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2L19.5 8.5L27 9.5L21.5 15L23 22.5L16 19L9 22.5L10.5 15L5 9.5L12.5 8.5L16 2Z" fill="currentColor" opacity="0.2"/>
+                        <path d="M16 4L10 10H6L8 16L6 22H12L16 28L20 22H26L24 16L26 10H22L16 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                        <circle cx="16" cy="15" r="3" fill="currentColor" opacity="0.6"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Travis County <span class="logo-suffix">Farm</span></span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="research-page">
+        <div class="container">
+
+            <!-- Hero -->
+            <div class="research-hero">
+                <span class="section-subtitle">Market Research</span>
+                <h1 class="section-title" style="font-size: var(--text-5xl);">6-Product Market Analysis</h1>
+                <p>Travis County Farm &middot; February 2026 &middot; Internal Use Only</p>
+            </div>
+
+            <!-- Top-Level Stats -->
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <div class="stat-card-number">$50B+</div>
+                    <div class="stat-card-label">Combined TAM</div>
+                    <div class="stat-card-sub">US market across all 6 categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-number">~68%</div>
+                    <div class="stat-card-label">Avg Gross Margin</div>
+                    <div class="stat-card-sub">Weighted across product line</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-number">5-10%</div>
+                    <div class="stat-card-label">Category CAGR</div>
+                    <div class="stat-card-sub">Every product in a growing market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-number">$109</div>
+                    <div class="stat-card-label">Full Basket Value</div>
+                    <div class="stat-card-sub">All 6 products per customer</div>
+                </div>
+            </div>
+
+            <!-- Product Snapshot Table -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Product Line Overview</h2>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>US Market Size</th>
+                            <th>CAGR</th>
+                            <th>Gross Margin</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">TCF's Raw Honey</td>
+                            <td class="number">$18</td>
+                            <td>$2.88B (honey) / $329M (raw)</td>
+                            <td class="number">5.2-7.6%</td>
+                            <td class="number">51-76%</td>
+                            <td><span class="tag flagship">Flagship</span></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Beeswax Candles</td>
+                            <td class="number">$16</td>
+                            <td>$3.42B (candles) / $381M (eco)</td>
+                            <td class="number">5.6-8.4%</td>
+                            <td class="number">58-68%</td>
+                            <td><span class="tag growth">Growth</span></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Herbal Tea Blends</td>
+                            <td class="number">$14</td>
+                            <td>$4.7B (herbal tea)</td>
+                            <td class="number">7.0%+</td>
+                            <td class="number">50-70%</td>
+                            <td><span class="tag growth">Growth</span></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Tallow Balm</td>
+                            <td class="number">$24</td>
+                            <td>$9.09B (organic skincare)</td>
+                            <td class="number">4.4-9.6%</td>
+                            <td class="number">70-80%</td>
+                            <td><span class="tag trending">Trending</span></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Elderberry Syrup</td>
+                            <td class="number">$22</td>
+                            <td>$145M (elderberry US)</td>
+                            <td class="number">6.8-7.8%</td>
+                            <td class="number">57-78%</td>
+                            <td><span class="tag growth">Growth</span></td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Herbal Healing Salve</td>
+                            <td class="number">$15</td>
+                            <td>$21.0B (herbal medicine)</td>
+                            <td class="number">9.33%</td>
+                            <td class="number">80-83%</td>
+                            <td><span class="tag growth">Growth</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Margin Chart -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Gross Margins vs Industry Average</h2>
+                </div>
+
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">Healing Salve</span>
+                        <div class="bar-track">
+                            <div class="bar-fill sage" style="width: 82%"><span class="bar-value">82%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 65% industry</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Tallow Balm</span>
+                        <div class="bar-track">
+                            <div class="bar-fill terra" style="width: 75%"><span class="bar-value">75%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 65% industry</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Elderberry Syrup</span>
+                        <div class="bar-track">
+                            <div class="bar-fill purple" style="width: 67%"><span class="bar-value">67%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 45% craft bev</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Raw Honey</span>
+                        <div class="bar-track">
+                            <div class="bar-fill gold" style="width: 64%"><span class="bar-value">64%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 40% food avg</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Beeswax Candles</span>
+                        <div class="bar-track">
+                            <div class="bar-fill gold" style="width: 63%"><span class="bar-value">63%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 49% non-VI</span>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Herbal Tea</span>
+                        <div class="bar-track">
+                            <div class="bar-fill sage" style="width: 60%"><span class="bar-value">60%</span></div>
+                        </div>
+                        <span class="bar-value-outside">vs 50% specialty</span>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Why Margins Beat Industry Averages</div>
+                    <p>Vertical integration is the moat. TCF owns the bees that produce the honey and beeswax feeding into 4 of 6 products. This results in 40-60% lower COGS than competitors purchasing ingredients wholesale. Raw beeswax at $5/lb becomes $40+/lb in finished candles (800% markup) and $120-240/lb in healing salve (12-30x value multiplication).</p>
+                </div>
+            </div>
+
+            <!-- Growth Rates Chart -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Market Growth Rates (CAGR vs 2.5% GDP)</h2>
+                </div>
+
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">Herbal Medicine</span>
+                        <div class="bar-track">
+                            <div class="bar-fill sage" style="width: 93%"><span class="bar-value">9.33% (3.7x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Beeswax Candles</span>
+                        <div class="bar-track">
+                            <div class="bar-fill gold" style="width: 84%"><span class="bar-value">8.4% (3.4x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Elderberry</span>
+                        <div class="bar-track">
+                            <div class="bar-fill purple" style="width: 73%"><span class="bar-value">7.3% (2.9x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Herbal Tea</span>
+                        <div class="bar-track">
+                            <div class="bar-fill sage" style="width: 70%"><span class="bar-value">7.0% (2.8x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Raw Honey</span>
+                        <div class="bar-track">
+                            <div class="bar-fill gold" style="width: 60%"><span class="bar-value">6.0% (2.4x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Tallow/Skincare</span>
+                        <div class="bar-track">
+                            <div class="bar-fill terra" style="width: 58%"><span class="bar-value">5.84% (2.3x GDP)</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label" style="color: var(--color-text-muted)">US GDP (baseline)</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 25%; background: var(--color-border-dark);"><span class="bar-value">2.5%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 1: RAW HONEY ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(200,145,46,0.12); color: #c8912e;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>
+                    </div>
+                    <h2 class="research-section-title">TCF's Raw Honey</h2>
+                    <span class="research-section-price">$18</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>US honey market: <strong>$2.88B</strong> (2024), growing to $3.19B by 2026</li>
+                            <li>Raw honey segment: <strong>$329M</strong>, growing at <strong>6.0-7.6% CAGR</strong></li>
+                            <li>Raw honey dollar sales: <strong>+11.7% YoY</strong> (2-3x conventional)</li>
+                            <li>73% of US honey is imported; 10% found adulterated by FDA</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Unit Economics</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <tbody>
+                                <tr><td>Raw honey (own hives)</td><td class="number">$1.50-$3.00</td></tr>
+                                <tr><td>Jar + lid</td><td class="number">$0.80-$1.50</td></tr>
+                                <tr><td>Label + packaging</td><td class="number">$0.50-$1.00</td></tr>
+                                <tr><td>Labor</td><td class="number">$1.00-$2.00</td></tr>
+                                <tr><td class="highlight">Total COGS</td><td class="number highlight">$4.25-$8.75</td></tr>
+                                <tr><td class="highlight">Gross Margin</td><td class="number highlight">51-76%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Austin Advantage</div>
+                    <p>Austin's severe year-round allergy seasons (cedar fever Dec-Feb, oak Mar-May, ragweed Aug-Oct) create persistent local honey demand. Closest competitor Two Hives Honey charges $2.83-$3.33/oz. TCF at $1.13/oz is 63-66% below while maintaining artisan positioning. Even capturing 1% of Austin's premium honey segment equals $155K/year.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 2: BEESWAX CANDLES ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(218,168,78,0.12); color: #daa84e;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="8" height="12" rx="1"/><line x1="12" y1="8" x2="12" y2="5"/><path d="M10,5 Q12,1 14,5"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Beeswax Candles</h2>
+                    <span class="research-section-price">$16</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>US candle market: <strong>$3.42B</strong> (2024), growing to $4.69B by 2030</li>
+                            <li>Beeswax segment growing at <strong>8.4% CAGR</strong> (50% faster than market)</li>
+                            <li><strong>55%</strong> of consumers now prefer natural wax over synthetic</li>
+                            <li>7 in 10 US households use candles; 76% see them as ideal gifts</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Vertical Integration Advantage</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <thead><tr><th>Component</th><th>TCF (Own Wax)</th><th>Competitor</th></tr></thead>
+                            <tbody>
+                                <tr><td>Beeswax</td><td class="number">$0.50-$1.00</td><td>$2.50-$4.00</td></tr>
+                                <tr><td>Wick + container</td><td class="number">$1.00-$2.00</td><td>$1.00-$2.00</td></tr>
+                                <tr><td>Label + labor</td><td class="number">$1.80-$2.50</td><td>$1.80-$2.50</td></tr>
+                                <tr><td class="highlight">Total COGS</td><td class="number highlight">$5.15-$6.75</td><td>$8.15-$11.00</td></tr>
+                                <tr><td class="highlight">Gross Margin</td><td class="number highlight">58-68%</td><td>31-49%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Value Multiplication</div>
+                    <p>Raw beeswax at $5/lb converts to finished candles at $40+/lb equivalent -- an ~800% markup. Beeswax burns longer than any other wax (29hrs/100g vs 18 for soy, 15 for paraffin), releases no soot, and has a natural honey scent without added fragrance. At $16, TCF undercuts Bluecorn ($18-$55) and Big Dipper ($11-$35) while maintaining premium positioning. Holiday season drives 35-40% of annual candle sales.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 3: HERBAL TEA ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(107,124,94,0.12); color: #6b7c5e;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6,8 L6,18 Q6,22 12,22 Q18,22 18,18 L18,8"/><path d="M18,11 Q22,11 22,15 Q22,18 18,18"/><line x1="4" y1="8" x2="20" y2="8"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Herbal Tea Blends</h2>
+                    <span class="research-section-price">$14</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>US herbal tea market: <strong>$4.7B</strong> (2026), growing at <strong>7.0%+ CAGR</strong></li>
+                            <li>Functional beverages market: <strong>$168B</strong>, botanicals at 9.04% CAGR</li>
+                            <li><strong>37% of Gen Z</strong> drinks tea more than any generation</li>
+                            <li>Mood-support beverages: <strong>87% YoY growth</strong></li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Unit Economics & Cross-Sell</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <tbody>
+                                <tr><td>COGS per unit</td><td class="number">$4.25-$7.00</td></tr>
+                                <tr><td class="highlight">Gross Margin</td><td class="number highlight">50-70%</td></tr>
+                                <tr><td>Tea + Honey bundle</td><td class="number">$28-$30</td></tr>
+                                <tr><td>AOV increase with bundle</td><td class="number highlight">+100-114%</td></tr>
+                                <tr><td>Austin competitors</td><td>Only 1 (Zhi Tea)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 4: TALLOW BALM ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(181,104,74,0.12); color: #b5684a;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="7" width="14" height="14" rx="3"/><ellipse cx="12" cy="7" rx="6" ry="2"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Tallow Balm <span class="tag trending" style="margin-left: 8px;">Trending</span></h2>
+                    <span class="research-section-price">$24</span>
+                </div>
+
+                <div class="callout accent">
+                    <div class="callout-title">TikTok Virality Data</div>
+                    <p><strong>#1 searched skincare ingredient</strong> by YoY growth (Spate 2025). +326% YoY search growth for "beef tallow for skin." 131,000+ TikTok videos under #beeftallow with ~101M views. The category is transitioning from viral peak to established niche -- ideal entry timing.</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>US organic skincare: <strong>$9.09B</strong> (2025), growing to $11.24B by 2030</li>
+                            <li>Global tallow balm: <strong>$280M</strong> (2025), projected $460M by 2034</li>
+                            <li>Clean beauty market: <strong>9.98-14.8% CAGR</strong></li>
+                            <li><strong>74%</strong> of consumers consider organic ingredients important</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Pricing Position (Sweet Spot)</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <thead><tr><th>Brand</th><th>Price</th></tr></thead>
+                            <tbody>
+                                <tr><td>Budget brands</td><td>$9-$15</td></tr>
+                                <tr><td class="highlight">TCF Tallow Balm</td><td class="number highlight">$24</td></tr>
+                                <tr><td>FATCO</td><td>$28-$32</td></tr>
+                                <tr><td>Primally Pure</td><td>$30+ (1oz)</td></tr>
+                                <tr><td>Summer Solace</td><td>$34+</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Highest Margin Product: 70-80% Gross</div>
+                    <p>COGS of $4.80-$7.20 per unit yields $16.80-$19.20 gross profit per tin. 20-40% below premium competitors. Market projected to grow 64% through 2034. "Ancestral skincare" movement aligns with the broader clean beauty shift, making this a lasting trend rather than a fad.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 5: ELDERBERRY SYRUP ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(124,58,237,0.12); color: #7c3aed;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9,4 L9,18 Q9,22 12,22 Q15,22 15,18 L15,4"/><ellipse cx="12" cy="4" rx="4" ry="2"/><circle cx="11" cy="11" r="1.5" fill="currentColor" opacity="0.3"/><circle cx="13" cy="14" r="1.5" fill="currentColor" opacity="0.3"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Elderberry Syrup</h2>
+                    <span class="research-section-price">$22</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>Syrup sub-segment: <strong>$110M</strong> (2024), projected <strong>$480M</strong> by 2035</li>
+                            <li>Immune health supplements: <strong>$35.35B</strong>, growing at 9% CAGR</li>
+                            <li>Elderberry: <strong>#2 herbal supplement</strong> in US mainstream retail</li>
+                            <li><strong>35%</strong> of consumers started regular immune supplements post-COVID</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Unit Economics</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <tbody>
+                                <tr><td>Elderberries</td><td class="number">$1.50-$3.00</td></tr>
+                                <tr><td>TCF raw honey (own)</td><td class="number">$1.00-$2.00</td></tr>
+                                <tr><td>Spices + bottle + label</td><td class="number">$1.40-$2.45</td></tr>
+                                <tr><td>Labor</td><td class="number">$1.00-$2.00</td></tr>
+                                <tr><td class="highlight">Total COGS</td><td class="number highlight">$4.90-$9.45</td></tr>
+                                <tr><td class="highlight">Gross Margin</td><td class="number highlight">57-78%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Unique Differentiator: Own-Honey Sweetened</div>
+                    <p>Mass-market competitors (Sambucol, Nature's Way) use sugar or fructose. TCF is sweetened with its own raw honey -- a genuine dual-benefit story that no competitor can replicate without owning bees. Own-honey production saves $1.50-$3.00/bottle vs competitors. Peak demand Oct-Feb (flu season) with holiday gifting overlap. Texas SB 541 (2025) raised cottage food cap to $150,000.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== PRODUCT 6: HERBAL HEALING SALVE ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon" style="background: rgba(138,158,122,0.12); color: #8a9e7a;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="16" rx="8" ry="3"/><ellipse cx="12" cy="12" rx="8" ry="3"/><ellipse cx="12" cy="8" rx="8" ry="3"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Herbal Healing Salve</h2>
+                    <span class="research-section-price">$15</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Market Size & Growth</div>
+                        <ul>
+                            <li>US herbal medicine: <strong>$21.0B</strong> (2024), projected <strong>$56B</strong> by 2035</li>
+                            <li>CAGR: <strong>9.33%</strong> (fastest-growing category in the line)</li>
+                            <li><strong>71%</strong> of US adults use herbal supplements</li>
+                            <li>#herbalremedies: <strong>1.2B+</strong> TikTok views</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Best COGS in the Line</div>
+                        <table class="data-table" style="margin-bottom: 0;">
+                            <thead><tr><th>Component</th><th>TCF (Own Wax)</th><th>Competitor</th></tr></thead>
+                            <tbody>
+                                <tr><td>Beeswax</td><td class="number">$0.25-$0.50</td><td>$1.50-$3.00</td></tr>
+                                <tr><td>Oils + herbs + tin</td><td class="number">$1.75-$2.60</td><td>$2.25-$3.60</td></tr>
+                                <tr><td class="highlight">Total COGS</td><td class="number highlight">$2.50-$3.00</td><td>$4.00-$6.00</td></tr>
+                                <tr><td class="highlight">Gross Margin</td><td class="number highlight">80-83%</td><td>60-73%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">12-30x Value Multiplication</div>
+                    <p>Raw beeswax at $8-10/lb becomes finished salve at $120-240/lb equivalent. This is the highest margin percentage in the entire product line (80-83%), with the lowest absolute COGS ($2.50-$3.00). Beeswax is a natural byproduct of honey production, giving TCF near-zero marginal material cost for the core ingredient.</p>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== VERTICAL INTEGRATION ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Vertical Integration Model</h2>
+                </div>
+
+                <div class="vi-diagram">
+                    <div class="vi-row">
+                        <div class="vi-node">
+                            <div class="vi-circle source">Bee-<br>hives</div>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle source">Herb<br>Garden</div>
+                        </div>
+                    </div>
+                    <div class="vi-connector">&#x2193;</div>
+                    <div class="vi-row">
+                        <div class="vi-node">
+                            <div class="vi-circle source">Honey</div>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle source">Beeswax</div>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle source">Herbs</div>
+                        </div>
+                    </div>
+                    <div class="vi-connector">&#x2193;</div>
+                    <div class="vi-row">
+                        <div class="vi-node">
+                            <div class="vi-circle product">Honey</div>
+                            <span class="vi-price">$18</span>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle product">Syrup</div>
+                            <span class="vi-price">$22</span>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle product">Candle</div>
+                            <span class="vi-price">$16</span>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle product">Salve</div>
+                            <span class="vi-price">$15</span>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle product">Tea</div>
+                            <span class="vi-price">$14</span>
+                        </div>
+                        <div class="vi-node">
+                            <div class="vi-circle product">Tallow</div>
+                            <span class="vi-price">$24</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== REVENUE MODEL ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Year 1 Revenue Scenarios</h2>
+                </div>
+
+                <div class="revenue-grid">
+                    <div class="revenue-card">
+                        <div class="revenue-card-tier">Conservative</div>
+                        <div class="revenue-card-amount">$65K-$131K</div>
+                        <div class="revenue-card-period">Year 1 Annual</div>
+                        <div class="revenue-card-details">Farmers markets only<br>50-100 units/product/month<br>$5.4K-$10.9K monthly</div>
+                    </div>
+                    <div class="revenue-card featured">
+                        <div class="revenue-card-tier">Moderate</div>
+                        <div class="revenue-card-amount">$196K-$327K</div>
+                        <div class="revenue-card-period">Year 1 Annual</div>
+                        <div class="revenue-card-details">Markets + online DTC<br>150-250 units/product/month<br>$16.4K-$27.3K monthly</div>
+                    </div>
+                    <div class="revenue-card">
+                        <div class="revenue-card-tier">Aggressive</div>
+                        <div class="revenue-card-amount">$392K-$654K</div>
+                        <div class="revenue-card-period">Year 1 Annual</div>
+                        <div class="revenue-card-details">Markets + online + wholesale<br>300-500 units/product/month<br>$32.7K-$54.5K monthly</div>
+                    </div>
+                </div>
+
+                <!-- Customer LTV -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Metric</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>First purchase AOV</td><td class="number">$33-$38</td></tr>
+                        <tr><td>Repeat purchase rate (consumables)</td><td class="number">30-40%</td></tr>
+                        <tr><td>Purchases/year (repeat customers)</td><td class="number">3-5</td></tr>
+                        <tr><td>Annual value per repeat customer</td><td class="number">$99-$190</td></tr>
+                        <tr><td>3-year CLV (repeat customers)</td><td class="number highlight">$297-$570</td></tr>
+                        <tr><td>CAC (farmers market)</td><td class="number">$5-$15</td></tr>
+                        <tr><td>CAC (online DTC)</td><td class="number">$30-$80</td></tr>
+                        <tr><td class="highlight">LTV:CAC Ratio</td><td class="number highlight">3:1 to 6:1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- ===================== COMPETITIVE ADVANTAGES ===================== -->
+            <div class="research-section">
+                <div class="research-section-header">
+                    <div class="research-section-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h2 class="research-section-title">Competitive Advantages</h2>
+                </div>
+
+                <div class="advantage-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-number">01</div>
+                        <div class="advantage-title">Vertical Integration Moat</div>
+                        <div class="advantage-text">Own bees produce honey and beeswax feeding 4 of 6 products. 40-60% lower COGS than competitors. Cannot be replicated without owning bees and land.</div>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-number">02</div>
+                        <div class="advantage-title">Six Revenue Streams, One Operation</div>
+                        <div class="advantage-text">Diversifies risk, smooths seasonal demand, maximizes customer LTV through natural cross-selling. Each product reinforces the others.</div>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-number">03</div>
+                        <div class="advantage-title">Affordable Premium Positioning</div>
+                        <div class="advantage-text">Every product priced 20-50% below premium competitors while delivering equivalent quality. The value sweet spot that drives volume.</div>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-number">04</div>
+                        <div class="advantage-title">Austin Market Fit</div>
+                        <div class="advantage-text">2.4M metro, health-conscious culture, severe allergy seasons, strong farmers market ecosystem. No dominant local competitor offers this product range.</div>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-number">05</div>
+                        <div class="advantage-title">Social Media Tailwinds</div>
+                        <div class="advantage-text">Tallow balm is #1 trending skincare ingredient (+326% search growth). #herbalremedies has 1.2B+ TikTok views. Farm content performs well organically.</div>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-number">06</div>
+                        <div class="advantage-title">Consumer Mega-Trends Aligned</div>
+                        <div class="advantage-text">71% use herbal supplements. 78% prefer natural ingredients. 70% pay premium for local. 72% of millennials pay more for sustainable. All trends point to TCF.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="text-align: center; padding: var(--spacing-3xl) 0 var(--spacing-xl); border-top: 1px solid var(--color-border); margin-top: var(--spacing-3xl);">
+                <p style="font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-text-muted);">Travis County Farm</p>
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">From Our Land to Your Hands &middot; February 2026</p>
+                <p style="font-size: var(--text-xs); color: var(--color-border-dark); margin-top: var(--spacing-md);">Internal use only. Not for public distribution.</p>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

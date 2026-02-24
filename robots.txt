@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /research
+Disallow: /research.html
