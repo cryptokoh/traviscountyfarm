@@ -501,20 +501,292 @@
         .tag.trending { background: var(--color-accent-subtle); color: var(--color-accent); }
         .tag.flagship { background: var(--color-primary-subtle); color: var(--color-primary-dark); }
 
-        /* Responsive */
+        /* Mobile product cards (hidden on desktop) */
+        .overview-mobile {
+            display: none;
+        }
+
+        .mobile-product-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mpc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mpc-header .highlight {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .mpc-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .mpc-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mpc-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            font-weight: 600;
+        }
+
+        .mpc-val {
+            font-family: var(--font-display);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Responsive - Tablet */
         @media (max-width: 1024px) {
             .stat-cards { grid-template-columns: repeat(2, 1fr); }
             .revenue-grid { grid-template-columns: 1fr; }
             .advantage-grid { grid-template-columns: 1fr; }
         }
 
+        /* Responsive - Mobile */
         @media (max-width: 768px) {
-            .stat-cards { grid-template-columns: 1fr; }
+            .research-page {
+                padding-top: calc(var(--nav-height) + var(--spacing-xl));
+            }
+
+            .research-hero {
+                padding: var(--spacing-xl) 0;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .research-hero .section-title {
+                font-size: var(--text-3xl) !important;
+            }
+
+            .stat-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-md);
+            }
+
+            .stat-card {
+                padding: var(--spacing-lg);
+            }
+
+            .stat-card-number {
+                font-size: var(--text-2xl);
+            }
+
+            /* Swap table for cards on mobile */
+            .overview-desktop {
+                display: none !important;
+            }
+
+            .overview-mobile {
+                display: block;
+            }
+
             .info-grid { grid-template-columns: 1fr; }
-            .bar-label { width: 100px; font-size: var(--text-xs); }
-            .research-section-header { flex-wrap: wrap; }
-            .research-section-price { margin-left: 0; margin-top: var(--spacing-sm); }
-            .vi-row { gap: var(--spacing-md); }
+
+            .research-section-header {
+                flex-wrap: wrap;
+            }
+
+            .research-section-price {
+                margin-left: 0;
+                margin-top: var(--spacing-sm);
+            }
+
+            .research-section-title {
+                font-size: var(--text-xl);
+            }
+
+            /* Bar charts - stack label above bar */
+            .bar-row {
+                flex-wrap: wrap;
+                gap: var(--spacing-xs);
+            }
+
+            .bar-label {
+                width: 100%;
+                text-align: left;
+                font-size: var(--text-xs);
+                font-weight: 600;
+            }
+
+            .bar-track {
+                height: 24px;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .bar-value {
+                font-size: 10px;
+            }
+
+            .bar-value-outside {
+                font-size: 10px;
+                flex-shrink: 0;
+            }
+
+            /* Tables - horizontal scroll wrapper */
+            .data-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+                font-size: var(--text-xs);
+            }
+
+            .data-table thead th,
+            .data-table tbody td {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+
+            /* Info cards inside tables - allow wrapping */
+            .info-card .data-table {
+                white-space: normal;
+            }
+
+            /* VI diagram */
+            .vi-diagram {
+                padding: var(--spacing-lg);
+            }
+
+            .vi-row {
+                gap: var(--spacing-sm);
+            }
+
+            .vi-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 10px;
+            }
+
+            .vi-price {
+                font-size: var(--text-xs);
+            }
+
+            /* Revenue cards */
+            .revenue-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .revenue-card-amount {
+                font-size: var(--text-2xl);
+            }
+
+            /* Advantage grid */
+            .advantage-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            /* Callouts */
+            .callout {
+                padding: var(--spacing-lg);
+            }
+
+            /* Section dividers */
+            .section-divider {
+                margin: var(--spacing-xl) 0;
+            }
+
+            .research-section {
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .info-card {
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* Responsive - Small Mobile */
+        @media (max-width: 480px) {
+            .stat-cards {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+
+            .stat-card {
+                padding: var(--spacing-md);
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-md);
+                text-align: left;
+            }
+
+            .stat-card-number {
+                font-size: var(--text-xl);
+                white-space: nowrap;
+            }
+
+            .stat-card-label {
+                margin-top: 0;
+                font-size: var(--text-xs);
+            }
+
+            .stat-card-sub {
+                margin-top: 2px;
+                font-size: 10px;
+            }
+
+            .research-hero .section-title {
+                font-size: var(--text-2xl) !important;
+            }
+
+            .research-section-header {
+                gap: var(--spacing-sm);
+            }
+
+            .research-section-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .research-section-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .research-section-title {
+                font-size: var(--text-lg);
+            }
+
+            /* VI diagram - 3x2 grid on small screens */
+            .vi-row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-sm);
+                justify-items: center;
+            }
+
+            .vi-circle {
+                width: 44px;
+                height: 44px;
+                font-size: 9px;
+            }
+
+            .bar-value-outside {
+                display: none;
+            }
+
+            .info-card-title {
+                font-size: var(--text-base);
+            }
         }
     </style>
 </head>
@@ -579,7 +851,8 @@
                     <h2 class="research-section-title">Product Line Overview</h2>
                 </div>
 
-                <table class="data-table">
+                <!-- Desktop table -->
+                <table class="data-table overview-desktop">
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -641,6 +914,64 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- Mobile cards (hidden on desktop) -->
+                <div class="overview-mobile">
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">TCF's Raw Honey</span><span class="tag flagship">Flagship</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$18</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$2.88B</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">5.2-7.6%</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">51-76%</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">Beeswax Candles</span><span class="tag growth">Growth</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$16</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$3.42B</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">5.6-8.4%</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">58-68%</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">Herbal Tea Blends</span><span class="tag growth">Growth</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$14</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$4.7B</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">7.0%+</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">50-70%</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">Tallow Balm</span><span class="tag trending">Trending</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$24</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$9.09B</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">4.4-9.6%</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">70-80%</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">Elderberry Syrup</span><span class="tag growth">Growth</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$22</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$145M</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">6.8-7.8%</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">57-78%</span></div>
+                        </div>
+                    </div>
+                    <div class="mobile-product-card">
+                        <div class="mpc-header"><span class="highlight">Herbal Healing Salve</span><span class="tag growth">Growth</span></div>
+                        <div class="mpc-stats">
+                            <div class="mpc-stat"><span class="mpc-label">Price</span><span class="mpc-val">$15</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Market</span><span class="mpc-val">$21.0B</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">CAGR</span><span class="mpc-val">9.33%</span></div>
+                            <div class="mpc-stat"><span class="mpc-label">Margin</span><span class="mpc-val">80-83%</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Margin Chart -->
