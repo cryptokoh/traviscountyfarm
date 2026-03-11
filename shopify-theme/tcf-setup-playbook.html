@@ -940,6 +940,32 @@
       background: var(--honey-gold-pale);
       color: var(--text-primary);
     }
+
+    /* ===== Learn More Links ===== */
+    .learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--honey-gold);
+      text-decoration: none;
+      padding: 3px 10px;
+      border: 1px solid var(--honey-gold);
+      border-radius: 20px;
+      margin-left: 6px;
+      vertical-align: middle;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .learn-more:hover {
+      background: var(--honey-gold);
+      color: #fff;
+    }
+    .learn-more svg {
+      width: 12px;
+      height: 12px;
+    }
   </style>
 </head>
 <body>
@@ -1085,8 +1111,8 @@
           <h3>Understanding Shopify 2.0</h3>
           <p>Your theme is built on <strong>Shopify 2.0</strong>, which introduces a powerful concept: <strong>sections and blocks</strong>.</p>
           <ul>
-            <li><strong>Sections</strong> are the big building blocks of each page -- a hero banner, a product grid, a newsletter signup. You can add, remove, and reorder them.</li>
-            <li><strong>Blocks</strong> are the smaller pieces inside a section -- a single statistic in the hero, an icon in the about section, a menu item in the footer.</li>
+            <li><strong>Sections</strong> are the big building blocks of each page -- a hero banner, a product grid, a newsletter signup. You can add, remove, and reorder them. <a href="glossary.html#sections" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+            <li><strong>Blocks</strong> are the smaller pieces inside a section -- a single statistic in the hero, an icon in the about section, a menu item in the footer. <a href="glossary.html#blocks" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
           </ul>
           <p>This means you can customize every page of your store visually, without touching any code.</p>
 
@@ -1099,8 +1125,8 @@
             </div>
           </div>
           <ul>
-            <li><strong>Admin</strong> (yourstore.myshopify.com/admin) -- Your operational headquarters. Add products, process orders, view analytics, configure settings.</li>
-            <li><strong>Theme Editor</strong> (Online Store &gt; Themes &gt; Customize) -- Your design studio. Drag sections, edit text, adjust colors, preview changes before publishing.</li>
+            <li><strong>Admin</strong> (yourstore.myshopify.com/admin) -- Your operational headquarters. Add products, process orders, view analytics, configure settings. <a href="glossary.html#admin" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+            <li><strong>Theme Editor</strong> (Online Store &gt; Themes &gt; Customize) -- Your design studio. Drag sections, edit text, adjust colors, preview changes before publishing. <a href="glossary.html#theme-editor" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
           </ul>
         </div>
       </section>
@@ -1159,8 +1185,8 @@
           <p>The admin dashboard has a <strong>left sidebar menu</strong> with all the major sections you will need:</p>
           <ul>
             <li><strong>Home</strong> -- Dashboard overview with recent activity, sales stats, and quick actions</li>
-            <li><strong>Orders</strong> -- All incoming orders, fulfillment status, and order history</li>
-            <li><strong>Products</strong> -- Your product catalog, inventory, collections, and gift cards</li>
+            <li><strong>Orders</strong> -- All incoming orders, fulfillment status, and order history <a href="glossary.html#fulfillment" target="_top" class="learn-more">What is fulfillment?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
+            <li><strong>Products</strong> -- Your product catalog, inventory, collections, and gift cards <a href="glossary.html#collections" target="_top" class="learn-more">What are collections?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
             <li><strong>Customers</strong> -- Customer accounts, newsletter subscribers, and contact info</li>
             <li><strong>Content</strong> -- Blog posts, pages, and other content management</li>
             <li><strong>Analytics</strong> -- Sales reports, traffic data, and business insights</li>
@@ -1224,12 +1250,12 @@
             </li>
             <li>
               <div class="step-content">
-                <strong>Product type</strong> -- Select from the TCF product types (Honey, Beeswax, Herbal, Skincare, Wellness). This helps with organization and filtering.
+                <strong>Product type</strong> -- Select from the TCF product types (Honey, Beeswax, Herbal, Skincare, Wellness). This helps with organization and filtering. <a href="glossary.html#product-type" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
             <li>
               <div class="step-content">
-                <strong>Tags</strong> -- Add relevant tags for badges, filtering, and features (see the tag reference below).
+                <strong>Tags</strong> -- Add relevant tags for badges, filtering, and features (see the tag reference below). <a href="glossary.html#tags" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
             <li>
@@ -1259,7 +1285,7 @@
           <p>Every product has two price fields:</p>
           <ul>
             <li><strong>Price</strong> -- The actual selling price your customer pays.</li>
-            <li><strong>Compare at price</strong> -- The original/regular price. When this is set <em>higher</em> than the Price, the theme automatically shows a <strong>Sale badge</strong> and displays the discount.</li>
+            <li><strong>Compare at price</strong> -- The original/regular price. When this is set <em>higher</em> than the Price, the theme automatically shows a <strong>Sale badge</strong> and displays the discount. <a href="glossary.html#compare-at-price" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></li>
           </ul>
           <p>For example: Set Price to <strong>$18.00</strong> and Compare at price to <strong>$24.00</strong>. The product card will show "Sale" with the original price crossed out.</p>
 
@@ -1304,7 +1330,7 @@
           </div>
 
           <h3>Inventory & Variants</h3>
-          <p>If a product comes in multiple sizes or options (e.g., 8oz and 16oz jars), use <strong>Variants</strong>:</p>
+          <p>If a product comes in multiple sizes or options (e.g., 8oz and 16oz jars), use <strong>Variants</strong>: <a href="glossary.html#variants" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></p>
           <ol class="steps">
             <li>
               <div class="step-content">
@@ -1385,7 +1411,7 @@
           </div>
 
           <h3>Theme Settings (Global)</h3>
-          <p>Click the <strong>gear icon</strong> or "Theme settings" at the bottom of the left panel to access global settings that affect your entire store:</p>
+          <p>Click the <strong>gear icon</strong> or "Theme settings" at the bottom of the left panel to access global settings that affect your entire store: <a href="glossary.html#settings" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></p>
           <ul>
             <li><strong>Colors</strong> -- Your brand colors (Honey Gold, Farm Sage, Terracotta, Warm Cream) are pre-configured. Adjust them here if needed.</li>
             <li><strong>Typography</strong> -- Font families and sizes for headings, body text, and accent text.</li>
@@ -1733,7 +1759,7 @@
             </li>
             <li>
               <div class="step-content">
-                In the <strong>Template</strong> dropdown on the right side, choose the appropriate template for this page (see below).
+                In the <strong>Template</strong> dropdown on the right side, choose the appropriate template for this page (see below). <a href="glossary.html#templates" target="_top" class="learn-more">What are templates?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
             <li>
@@ -1872,7 +1898,7 @@
             </li>
             <li>
               <div class="step-content">
-                Set up <strong>shipping zones</strong> (e.g., "Local" for Travis County, "Texas" for statewide, "Domestic" for all US).
+                Set up <strong>shipping zones</strong> (e.g., "Local" for Travis County, "Texas" for statewide, "Domestic" for all US). <a href="glossary.html#shipping-zones" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
             <li>
@@ -1922,7 +1948,7 @@
             </div>
           </div>
 
-          <h3>Connecting a Custom Domain</h3>
+          <h3>Connecting a Custom Domain <a href="glossary.html#domain" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a></h3>
           <ol class="steps">
             <li>
               <div class="step-content">
@@ -1936,12 +1962,12 @@
             </li>
             <li>
               <div class="step-content">
-                Follow the on-screen instructions to update your domain's <strong>DNS settings</strong> (typically pointing the A record and CNAME to Shopify's servers).
+                Follow the on-screen instructions to update your domain's <strong>DNS settings</strong> (typically pointing the A record and CNAME to Shopify's servers). <a href="glossary.html#dns" target="_top" class="learn-more">What is DNS?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
             <li>
               <div class="step-content">
-                Shopify automatically provisions an <strong>SSL certificate</strong> for your domain (the padlock icon), which can take up to 48 hours to activate.
+                Shopify automatically provisions an <strong>SSL certificate</strong> for your domain (the padlock icon), which can take up to 48 hours to activate. <a href="glossary.html#ssl" target="_top" class="learn-more">What is SSL?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
               </div>
             </li>
           </ol>
@@ -2011,7 +2037,7 @@
               How do I change the cart from a drawer to a full page?
             </div>
             <div class="faq-answer">
-              Open the Theme Editor, then go to <span class="nav-path">Theme settings <span class="nav-arrow">&rsaquo;</span> Cart</span>. Change the <strong>Cart type</strong> setting from "Drawer" to "Page." Save your changes.
+              Open the Theme Editor, then go to <span class="nav-path">Theme settings <span class="nav-arrow">&rsaquo;</span> Cart</span>. Change the <strong>Cart type</strong> setting from "Drawer" to "Page." Save your changes. <a href="glossary.html#cart-drawer" target="_top" class="learn-more">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></a>
             </div>
           </div>
 

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Shopify Glossary - Travis County Farm</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c8912e;
+      --gold-light: #daa84e;
+      --sage: #6b7c5e;
+      --terra: #b5684a;
+      --cream: #faf8f4;
+      --text: #2d1f10;
+      --text-muted: #7a7067;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #3a2a14 0%, #2d1f10 100%);
+      padding: 40px 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .page-header__back {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .page-header__back:hover { color: #fff; }
+    .page-header__back svg { width: 18px; height: 18px; }
+
+    .page-header__title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.03em;
+    }
+
+    .page-header__subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .intro {
+      background: #fff;
+      border: 1px solid #e8e0d6;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .category {
+      margin-bottom: 40px;
+    }
+
+    .category__title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gold);
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .term {
+      background: #fff;
+      border: 1px solid #e8e0d6;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .term:target {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200, 145, 46, 0.15);
+    }
+
+    .term__name {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .term__icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .term__simple {
+      font-size: 15px;
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .term__analogy {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-left: 3px solid var(--sage);
+    }
+    .term__analogy strong {
+      color: var(--sage);
+    }
+
+    .term__example {
+      background: #f5f0e8;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 14px;
+      margin-top: 10px;
+      color: var(--text-muted);
+      border-left: 3px solid var(--gold);
+    }
+    .term__example strong {
+      color: var(--gold);
+    }
+
+    .term__example code {
+      background: rgba(200, 145, 46, 0.12);
+      color: var(--terra);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .page-header { padding: 32px 16px; }
+      .page-header__back { position: static; transform: none; justify-content: center; margin-bottom: 12px; }
+      .page-header__title { font-size: 18px; }
+      .container { padding: 24px 16px 60px; }
+      .term { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html" class="page-header__back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Playbook
+    </a>
+    <h1 class="page-header__title">Shopify Glossary</h1>
+    <p class="page-header__subtitle">Plain-English guide to Shopify terms</p>
+  </header>
+
+  <div class="container">
+
+    <div class="intro">
+      This glossary explains Shopify terms in everyday language. If you see something in your Shopify admin or the playbook that you don't recognize, look it up here. No tech background needed.
+    </div>
+
+    <!-- ===== Your Store ===== -->
+    <div class="category">
+      <h2 class="category__title">Your Store</h2>
+
+      <div class="term" id="admin">
+        <div class="term__name"><span class="term__icon">&#9881;</span> Admin (Dashboard)</div>
+        <p class="term__simple">The Admin is the behind-the-scenes control panel for your store. It's where you add products, check orders, manage customers, and change settings. Customers never see this -- only you do.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> The back office of a physical store. Customers shop out front, but you do your paperwork, inventory, and planning in the back.</div>
+      </div>
+
+      <div class="term" id="theme">
+        <div class="term__name"><span class="term__icon">&#127912;</span> Theme</div>
+        <p class="term__simple">A theme is the complete design package for your online store -- the colors, fonts, layout, and visual style that customers see. Your TCF theme was custom-built to match your brand's farmhouse look. You can have multiple themes saved but only one is "live" (published) at a time.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> The interior design of your store. You can redecorate (switch themes) without changing the products you sell.</div>
+      </div>
+
+      <div class="term" id="theme-editor">
+        <div class="term__name"><span class="term__icon">&#9998;</span> Theme Editor (Customizer)</div>
+        <p class="term__simple">The Theme Editor is Shopify's visual design tool. It shows a live preview of your store on the right and a settings panel on the left. You can click on any part of the page to edit it -- change text, swap images, rearrange layout, adjust colors -- all without writing code. Find it at <em>Online Store &gt; Themes &gt; Customize</em>.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> A drag-and-drop design app. What you see is what your customers will see.</div>
+      </div>
+
+      <div class="term" id="domain">
+        <div class="term__name"><span class="term__icon">&#127760;</span> Domain</div>
+        <p class="term__simple">Your domain is your website address -- the URL people type to visit your store (e.g., traviscountyfarm.com). You buy a domain name separately and connect it to Shopify so people can find your store.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Your store's street address. The domain is how people find you online.</div>
+      </div>
+
+      <div class="term" id="ssl">
+        <div class="term__name"><span class="term__icon">&#128274;</span> SSL Certificate</div>
+        <p class="term__simple">SSL is the padlock icon you see in the browser bar. It means the connection between your customer's browser and your store is encrypted and secure. Shopify provides this automatically for free -- you don't need to do anything. It protects credit card info and personal data during checkout.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> A sealed envelope. Only you and the customer can read what's inside.</div>
+      </div>
+    </div>
+
+    <!-- ===== Page Building ===== -->
+    <div class="category">
+      <h2 class="category__title">Page Building</h2>
+
+      <div class="term" id="sections">
+        <div class="term__name"><span class="term__icon">&#9638;</span> Sections</div>
+        <p class="term__simple">Sections are the big building blocks of every page. Each section is a self-contained area with its own purpose -- a hero banner at the top, a product grid in the middle, a newsletter signup at the bottom. You can add, remove, rearrange, and customize sections in the Theme Editor.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Rooms in a house. Each room (section) has its own purpose -- kitchen, bedroom, living room. You can rearrange furniture within each room or add/remove rooms.</div>
+        <div class="term__example"><strong>Your TCF homepage sections:</strong> Hero Banner, Featured Products, Our Story, Newsletter Signup</div>
+      </div>
+
+      <div class="term" id="blocks">
+        <div class="term__name"><span class="term__icon">&#9642;</span> Blocks</div>
+        <p class="term__simple">Blocks are the smaller pieces inside a section. If a section is a room, blocks are the individual pieces of furniture. For example, the Hero Banner section has "stat" blocks (the little counters showing "6 Products", "100% Natural", etc.). You can add, remove, and reorder blocks within their section.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Furniture in a room. You can add a new chair (block) to the living room (section), move it around, or take it out.</div>
+        <div class="term__example"><strong>Example:</strong> The "Our Story" section has text blocks for paragraphs and value blocks for the three icons (Locally Sourced, Small Batch, Chemical Free).</div>
+      </div>
+
+      <div class="term" id="templates">
+        <div class="term__name"><span class="term__icon">&#128196;</span> Templates</div>
+        <p class="term__simple">Templates are the pre-designed layouts for different types of pages. There's one for the homepage, one for product pages, one for collection pages, one for blog posts, etc. Each template comes with the right sections already set up. When you create a new page, you choose which template it uses.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Floor plans. An office floor plan is different from a restaurant floor plan. Each one has the right rooms for that type of building.</div>
+        <div class="term__example"><strong>Your TCF templates:</strong> Default page, About page (<code>page.about</code>), Contact page (<code>page.contact</code>)</div>
+      </div>
+
+      <div class="term" id="settings">
+        <div class="term__name"><span class="term__icon">&#9881;</span> Theme Settings</div>
+        <p class="term__simple">Theme Settings are the global options that control how your entire store looks -- your brand colors (Honey Gold, Farm Sage, etc.), fonts, spacing, and general preferences. Changes here affect every page. Find them in the Theme Editor under the gear icon or "Theme settings" at the bottom of the left panel.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Your store's style guide. It sets the overall mood and look that applies everywhere.</div>
+      </div>
+    </div>
+
+    <!-- ===== Products ===== -->
+    <div class="category">
+      <h2 class="category__title">Products</h2>
+
+      <div class="term" id="products">
+        <div class="term__name"><span class="term__icon">&#127855;</span> Products</div>
+        <p class="term__simple">Products are the items you sell. Each product has a title, description, price, images, and other details. In your admin, go to <em>Products</em> to add, edit, or manage them.</p>
+      </div>
+
+      <div class="term" id="collections">
+        <div class="term__name"><span class="term__icon">&#128451;</span> Collections</div>
+        <p class="term__simple">A collection is a group of related products. You decide which products go in which collection. For example, you might have a "Honey Products" collection and a "Skincare" collection. Collections help customers browse your store by category. A single product can belong to multiple collections.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Aisles in a grocery store. The "Baking" aisle groups flour, sugar, and baking soda together. A product (like butter) might appear in multiple aisles.</div>
+      </div>
+
+      <div class="term" id="variants">
+        <div class="term__name"><span class="term__icon">&#8644;</span> Variants</div>
+        <p class="term__simple">Variants are different versions of the same product. If your Raw Honey comes in 8oz and 16oz jars, those are two variants of one product. Each variant can have its own price, inventory count, and image. Customers pick which variant they want using a dropdown or buttons on the product page.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Shirt sizes. A "Blue T-Shirt" is one product, but it comes in Small, Medium, and Large (three variants).</div>
+      </div>
+
+      <div class="term" id="tags">
+        <div class="term__name"><span class="term__icon">&#127991;</span> Tags</div>
+        <p class="term__simple">Tags are labels you attach to products. They don't show up to customers directly, but they power features behind the scenes. Your TCF theme uses tags to control badges and features:</p>
+        <div class="term__example">
+          <strong>Special TCF tags:</strong><br>
+          <code>coming-soon</code> -- Hides the "Add to Cart" button, shows "Coming Soon" instead<br>
+          <code>flagship</code> -- Shows a gold "Flagship" badge on the product<br>
+          <code>trending</code> -- Shows a "Trending" badge<br>
+          <code>new</code> -- Shows a "New" badge
+        </div>
+        <div class="term__analogy" style="margin-top: 10px;"><strong>Think of it like:</strong> Sticky notes on your filing system. They help you organize and flag items without changing the item itself.</div>
+      </div>
+
+      <div class="term" id="product-type">
+        <div class="term__name"><span class="term__icon">&#128193;</span> Product Type</div>
+        <p class="term__simple">Product type is a category label for your product (like "Honey", "Beeswax", "Herbal"). It helps with organization and tells the theme which decorative illustration to show as a fallback when a product doesn't have a photo. Set it in the product editor under "Product type."</p>
+      </div>
+
+      <div class="term" id="compare-at-price">
+        <div class="term__name"><span class="term__icon">&#128176;</span> Compare at Price</div>
+        <p class="term__simple">The "Compare at price" is the original price before a discount. If you set a product's price to $18 and the Compare at price to $24, the theme will automatically show "$24" crossed out next to "$18" and display a red "Sale" badge. Leave it blank if the product isn't on sale.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> The "Was $24, Now $18!" sticker you'd put on a product at a farmers market.</div>
+      </div>
+
+      <div class="term" id="inventory">
+        <div class="term__name"><span class="term__icon">&#128230;</span> Inventory</div>
+        <p class="term__simple">Inventory tracking keeps count of how many units you have in stock. When someone buys a product, the count goes down. When it hits zero, the product can automatically show as "Sold Out." You can turn inventory tracking on or off per product.</p>
+      </div>
+    </div>
+
+    <!-- ===== Orders & Customers ===== -->
+    <div class="category">
+      <h2 class="category__title">Orders & Customers</h2>
+
+      <div class="term" id="orders">
+        <div class="term__name"><span class="term__icon">&#128230;</span> Orders</div>
+        <p class="term__simple">When a customer completes checkout, it creates an order. Orders show what was purchased, the customer's info, shipping address, and payment status. You manage orders in the Admin under <em>Orders</em>.</p>
+      </div>
+
+      <div class="term" id="fulfillment">
+        <div class="term__name"><span class="term__icon">&#128666;</span> Fulfillment</div>
+        <p class="term__simple">Fulfillment means getting the product to the customer. When you pack and ship an order, you "fulfill" it. You can mark orders as fulfilled (shipped), partially fulfilled, or unfulfilled (not yet shipped). Shopify can automatically send the customer a shipping confirmation email with tracking info.</p>
+      </div>
+
+      <div class="term" id="customers">
+        <div class="term__name"><span class="term__icon">&#128101;</span> Customers</div>
+        <p class="term__simple">Your customer list includes everyone who has placed an order or signed up for your newsletter. You can view their order history, contact info, and tags. Newsletter subscribers get the <code>newsletter</code> tag automatically.</p>
+      </div>
+
+      <div class="term" id="shipping-zones">
+        <div class="term__name"><span class="term__icon">&#127758;</span> Shipping Zones</div>
+        <p class="term__simple">Shipping zones are geographic regions you ship to. For each zone, you set shipping rates (how much you charge for delivery). You might have a "Local" zone for Travis County with free delivery and a "Texas" zone with a flat rate.</p>
+      </div>
+    </div>
+
+    <!-- ===== Technical (simplified) ===== -->
+    <div class="category">
+      <h2 class="category__title">Behind the Scenes</h2>
+
+      <div class="term" id="metafields">
+        <div class="term__name"><span class="term__icon">&#128221;</span> Metafields</div>
+        <p class="term__simple">Metafields are extra data fields you can add to products, pages, or other parts of your store. Think of them as custom fields that don't come built-in. For example, you could add a "Harvest Date" metafield to your honey products. Your TCF theme can optionally use a metafield to control the "Coming Soon" feature instead of tags.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Adding extra lines to a product label. The standard label has name and price -- metafields let you add custom info like "Harvested: March 2026."</div>
+      </div>
+
+      <div class="term" id="dns">
+        <div class="term__name"><span class="term__icon">&#128268;</span> DNS Settings</div>
+        <p class="term__simple">DNS (Domain Name System) is the phone book of the internet. When you connect your domain to Shopify, you update the DNS settings to point your domain name to Shopify's servers. Shopify provides step-by-step instructions for this. You typically do this once during setup and never touch it again.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Call forwarding. You're telling the internet "when someone asks for traviscountyfarm.com, send them to Shopify."</div>
+      </div>
+
+      <div class="term" id="seo">
+        <div class="term__name"><span class="term__icon">&#128270;</span> SEO (Search Engine Optimization)</div>
+        <p class="term__simple">SEO is the practice of making your store easy to find on Google. It includes writing good product descriptions, using relevant keywords, adding image descriptions (alt text), and having a fast-loading website. Shopify handles many SEO basics automatically, but good product titles and descriptions help a lot.</p>
+        <div class="term__analogy"><strong>Think of it like:</strong> Putting up a clear, visible sign for your farmers market booth. The better your sign, the more people find you.</div>
+      </div>
+
+      <div class="term" id="cart-drawer">
+        <div class="term__name"><span class="term__icon">&#128722;</span> Cart Drawer vs Cart Page</div>
+        <p class="term__simple">When a customer adds something to their cart, it can either open a slide-out panel on the right side of the screen (Cart Drawer) or take them to a full cart page. Your TCF theme defaults to the Cart Drawer because it's faster and keeps customers on the page they were browsing. You can switch to the full page version in Theme Settings.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
