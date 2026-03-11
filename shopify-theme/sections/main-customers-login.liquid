@@ -1,0 +1,150 @@
+{{ 'component-customer.css' | asset_url | stylesheet_tag }}
+
+<section class="customer-section">
+  <div class="customer-section--narrow">
+    <h1 class="customer-title">{{ 'customer.login.title' | t }}</h1>
+
+    <div class="customer-form" id="customer-login-form">
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="customer-form__errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label for="customer-email" class="form-label">
+            {{ 'customer.login.email' | t }}
+          </label>
+          <input
+            type="email"
+            id="customer-email"
+            name="customer[email]"
+            class="form-input"
+            autocomplete="email"
+            autocapitalize="off"
+            autocorrect="off"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="customer-password" class="form-label">
+            {{ 'customer.login.password' | t }}
+          </label>
+          <input
+            type="password"
+            id="customer-password"
+            name="customer[password]"
+            class="form-input"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <a href="#recover" class="customer-form__link" id="recover-link" onclick="document.getElementById('customer-login-form').style.display='none';document.getElementById('recover-password-form').style.display='block';return false;">
+          {{ 'customer.login.forgot_password' | t }}
+        </a>
+
+        <div class="customer-form__actions">
+          <button type="submit" class="btn btn-primary btn-full">
+            {{ 'customer.login.sign_in' | t }}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <div class="customer-form__footer">
+        <p>
+          {{ 'customer.register.already_have_account' | t | replace: '?', '' | append: '?' | remove: '?' }}
+          <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t }}</a>
+        </p>
+      </div>
+    </div>
+
+    {%- comment -%} Recover password form {%- endcomment -%}
+    <div class="customer-form" id="recover-password-form" style="display: none;" role="region" aria-label="{{ 'customer.reset_password.title' | t }}">
+      {%- form 'recover_customer_password' -%}
+        <h2 class="customer-address-form__title">{{ 'customer.reset_password.title' | t }}</h2>
+        <p class="customer-subtitle" style="text-align:left;margin-top:0;">{{ 'customer.reset_password.subtext' | t }}</p>
+
+        {%- if form.posted_successfully? -%}
+          <div class="customer-form__success" role="status">
+            {{ 'customer.reset_password.success' | t }}
+          </div>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="customer-form__errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label for="recover-email" class="form-label">
+            {{ 'customer.reset_password.email' | t }}
+          </label>
+          <input
+            type="email"
+            id="recover-email"
+            name="email"
+            class="form-input"
+            autocomplete="email"
+            autocapitalize="off"
+            required
+          >
+        </div>
+
+        <div class="customer-form__actions">
+          <button type="submit" class="btn btn-primary btn-full">
+            {{ 'customer.reset_password.submit' | t }}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <div class="customer-form__footer">
+        <p>
+          <a href="#login" onclick="document.getElementById('recover-password-form').style.display='none';document.getElementById('customer-login-form').style.display='block';return false;">
+            {{ 'customer.login.sign_in' | t }}
+          </a>
+        </p>
+      </div>
+    </div>
+
+    {%- comment -%} Guest checkout option {%- endcomment -%}
+    {%- if checkout.guest_login -%}
+      <div class="customer-form__divider">{{ 'customer.login.guest_title' | t }}</div>
+
+      <div class="customer-form">
+        {%- form 'guest_login' -%}
+          <div class="customer-form__actions">
+            <button type="submit" class="btn btn-secondary btn-full">
+              {{ 'customer.login.guest_continue' | t }}
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- comment -%} Auto-show recover form if URL has #recover hash {%- endcomment -%}
+<script>
+  (function() {
+    if (window.location.hash === '#recover') {
+      var loginForm = document.getElementById('customer-login-form');
+      var recoverForm = document.getElementById('recover-password-form');
+      if (loginForm && recoverForm) {
+        loginForm.style.display = 'none';
+        recoverForm.style.display = 'block';
+      }
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Login",
+  "tag": "section",
+  "class": "section-customer-login"
+}
+{% endschema %}

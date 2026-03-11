@@ -1,0 +1,195 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+
+<div class="cart-page">
+  <div class="container">
+    {%- if cart.item_count > 0 -%}
+      <header class="cart-page__header">
+        <h1 class="cart-page__title">{{ 'cart.title' | t }}</h1>
+        <p class="cart-page__count">
+          {%- if cart.item_count == 1 -%}
+            {{ 'cart.item_count.one' | t: count: cart.item_count }}
+          {%- else -%}
+            {{ 'cart.item_count.other' | t: count: cart.item_count }}
+          {%- endif -%}
+        </p>
+      </header>
+
+      {% form 'cart', cart, id: 'cart-form', novalidate: 'novalidate' %}
+        <div class="cart-page__content">
+          {%- comment -%} Line items {%- endcomment -%}
+          <div class="cart-items">
+            <div class="cart-items__header" aria-hidden="true">
+              <span>{{ 'products.product.description' | t: default: 'Product' }}</span>
+              <span>{{ 'products.product.price.regular' | t: default: 'Price' }}</span>
+              <span>{{ 'cart.quantity' | t }}</span>
+              <span>{{ 'customer.order.total' | t: default: 'Total' }}</span>
+              <span></span>
+            </div>
+
+            <div class="cart-items__list">
+              {%- for item in cart.items -%}
+                <div class="cart-page-item" data-cart-page-item data-key="{{ item.key }}">
+                  {%- comment -%} Product info {%- endcomment -%}
+                  <div class="cart-page-item__product">
+                    <a href="{{ item.url }}" class="cart-page-item__image-link" aria-label="{{ item.product.title }}">
+                      {%- if item.image -%}
+                        <img
+                          src="{{ item.image | image_url: width: 160 }}"
+                          alt="{{ item.image.alt | escape | default: item.product.title | escape }}"
+                          width="80"
+                          height="80"
+                          loading="lazy"
+                          class="cart-page-item__image"
+                        >
+                      {%- else -%}
+                        <div class="cart-page-item__image-placeholder">
+                          {% render 'icon-cart' %}
+                        </div>
+                      {%- endif -%}
+                    </a>
+                    <div class="cart-page-item__info">
+                      <a href="{{ item.url }}" class="cart-page-item__title">
+                        {{ item.product.title }}
+                      </a>
+                      {%- if item.variant.title != 'Default Title' -%}
+                        <p class="cart-page-item__variant">{{ item.variant.title }}</p>
+                      {%- endif -%}
+                      {%- if item.selling_plan_allocation -%}
+                        <p class="cart-page-item__variant">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
+                  {%- comment -%} Unit price {%- endcomment -%}
+                  <div class="cart-page-item__price">
+                    {%- if item.original_price != item.final_price -%}
+                      <span class="cart-page-item__price-compare">{{ item.original_price | money }}</span>
+                    {%- endif -%}
+                    {{ item.final_price | money }}
+                  </div>
+
+                  {%- comment -%} Quantity {%- endcomment -%}
+                  <div class="cart-page-item__quantity">
+                    <div class="quantity-input" data-quantity-input>
+                      <button
+                        type="button"
+                        class="quantity-input__btn"
+                        data-quantity-minus
+                        aria-label="{{ 'cart.quantity' | t }}: decrease"
+                      >
+                        <span aria-hidden="true">&minus;</span>
+                      </button>
+                      <input
+                        type="number"
+                        name="updates[]"
+                        class="quantity-input__field"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        max="{{ item.variant.inventory_quantity | default: 99 }}"
+                        data-quantity-field
+                        data-key="{{ item.key }}"
+                        data-index="{{ forloop.index }}"
+                        aria-label="{{ 'cart.quantity' | t }}"
+                      >
+                      <button
+                        type="button"
+                        class="quantity-input__btn"
+                        data-quantity-plus
+                        aria-label="{{ 'cart.quantity' | t }}: increase"
+                      >
+                        <span aria-hidden="true">&plus;</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {%- comment -%} Line total {%- endcomment -%}
+                  <div class="cart-page-item__total">
+                    {{ item.final_line_price | money }}
+                  </div>
+
+                  {%- comment -%} Remove {%- endcomment -%}
+                  <a
+                    href="{{ item.url_to_remove }}"
+                    class="cart-page-item__remove"
+                    data-remove-cart-item
+                    data-key="{{ item.key }}"
+                    aria-label="{{ 'cart.remove' | t }}: {{ item.product.title }}"
+                  >
+                    {% render 'icon-close' %}
+                  </a>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          {%- comment -%} Summary sidebar {%- endcomment -%}
+          <div class="cart-summary">
+            <h2 class="cart-summary__title">{{ 'cart.subtotal' | t }}</h2>
+
+            {%- comment -%} Order note {%- endcomment -%}
+            {%- if section.settings.show_order_note -%}
+              <div class="cart-note">
+                <label for="cart-note" class="cart-note__label">{{ 'cart.note' | t }}</label>
+                <textarea
+                  id="cart-note"
+                  name="note"
+                  class="cart-note__textarea"
+                  placeholder="{{ 'cart.note_placeholder' | t }}"
+                >{{ cart.note }}</textarea>
+              </div>
+            {%- endif -%}
+
+            <div class="cart-summary__subtotal">
+              <span class="cart-summary__subtotal-label">{{ 'cart.subtotal' | t }}</span>
+              <span class="cart-summary__subtotal-value">{{ cart.total_price | money }}</span>
+            </div>
+
+            <p class="cart-summary__taxes-note">{{ 'cart.taxes_and_shipping' | t }}</p>
+
+            <button type="submit" name="checkout" class="btn btn-primary btn-lg cart-summary__checkout">
+              {{ 'cart.checkout' | t }}
+            </button>
+
+            <a href="{{ routes.all_products_collection_url | default: routes.root_url }}" class="cart-summary__continue">
+              {% render 'icon-arrow' %}
+              {{ 'cart.continue_shopping' | t }}
+            </a>
+          </div>
+        </div>
+      {% endform %}
+
+    {%- else -%}
+      {%- comment -%} Empty state {%- endcomment -%}
+      <div class="cart-empty">
+        <div class="cart-empty__icon">
+          {% render 'icon-cart' %}
+        </div>
+        <h1 class="cart-empty__title">{{ 'cart.empty' | t }}</h1>
+        <p class="cart-empty__text">{{ 'cart.taxes_and_shipping' | t }}</p>
+        <a href="{{ routes.all_products_collection_url | default: routes.root_url }}" class="btn btn-primary btn-lg">
+          {{ 'cart.continue_shopping' | t }}
+          {% render 'icon-arrow' %}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="{{ 'quantity-input.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "class": "section-cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_order_note",
+      "label": "Show order note",
+      "default": true,
+      "info": "Allow customers to add a note to their order."
+    }
+  ]
+}
+{% endschema %}

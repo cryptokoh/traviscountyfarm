@@ -1,0 +1,88 @@
+{
+  "settings_schema": {
+    "colors": { "name": "Colors" },
+    "typography": { "name": "Typography" },
+    "layout": { "name": "Layout" },
+    "cart": { "name": "Cart" },
+    "products": { "name": "Products" },
+    "social_media": { "name": "Social media" },
+    "favicon": { "name": "Favicon" }
+  },
+  "sections": {
+    "header": {
+      "name": "Header",
+      "settings": {
+        "logo_width": { "label": "Logo width" }
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "heading": { "label": "Heading" }
+      },
+      "blocks": {
+        "link_list": { "name": "Link list" },
+        "text": { "name": "Text" }
+      }
+    },
+    "hero_banner": {
+      "name": "Hero Banner",
+      "settings": {
+        "badge_text": { "label": "Badge text" },
+        "heading": { "label": "Heading" },
+        "subheading": { "label": "Subheading" },
+        "button_label": { "label": "Button label" },
+        "button_link": { "label": "Button link" }
+      },
+      "blocks": {
+        "stat": { "name": "Stat" }
+      }
+    },
+    "featured_collection": {
+      "name": "Featured Collection",
+      "settings": {
+        "title": { "label": "Title" },
+        "subtitle": { "label": "Subtitle" },
+        "description": { "label": "Description" },
+        "collection": { "label": "Collection" },
+        "products_to_show": { "label": "Products to show" }
+      }
+    },
+    "about_story": {
+      "name": "About / Story",
+      "settings": {
+        "subtitle": { "label": "Subtitle" },
+        "heading": { "label": "Heading" }
+      },
+      "blocks": {
+        "text": { "name": "Text block" },
+        "value": { "name": "Value item" }
+      }
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "settings": {
+        "heading": { "label": "Heading" },
+        "description": { "label": "Description" }
+      }
+    },
+    "main_product": {
+      "name": "Product page"
+    },
+    "main_collection": {
+      "name": "Collection page"
+    },
+    "main_cart": {
+      "name": "Cart page"
+    },
+    "cart_drawer": {
+      "name": "Cart drawer"
+    },
+    "rich_text": {
+      "name": "Rich text"
+    },
+    "image_with_text": {
+      "name": "Image with text"
+    }
+  }
+}

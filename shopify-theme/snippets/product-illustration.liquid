@@ -1,0 +1,115 @@
+{%- comment -%}
+  SVG illustration fallback for products without images.
+  Usage: {% render 'product-illustration', product: product %}
+  Selects illustration by product type or tag.
+{%- endcomment -%}
+
+{%- liquid
+  assign illustration = 'honey'
+  assign ptype = product.type | downcase
+
+  if ptype contains 'honey'
+    assign illustration = 'honey'
+  elsif ptype contains 'candle' or ptype contains 'beeswax'
+    assign illustration = 'candle'
+  elsif ptype contains 'tea'
+    assign illustration = 'tea'
+  elsif ptype contains 'tallow' or ptype contains 'balm'
+    assign illustration = 'tallow'
+  elsif ptype contains 'elderberry' or ptype contains 'syrup'
+    assign illustration = 'elderberry'
+  elsif ptype contains 'salve' or ptype contains 'herbal'
+    assign illustration = 'salve'
+  endif
+
+  for tag in product.tags
+    assign tag_lower = tag | downcase
+    if tag_lower == 'illustration-honey'
+      assign illustration = 'honey'
+      break
+    elsif tag_lower == 'illustration-candle'
+      assign illustration = 'candle'
+      break
+    elsif tag_lower == 'illustration-tea'
+      assign illustration = 'tea'
+      break
+    elsif tag_lower == 'illustration-tallow'
+      assign illustration = 'tallow'
+      break
+    elsif tag_lower == 'illustration-elderberry'
+      assign illustration = 'elderberry'
+      break
+    elsif tag_lower == 'illustration-salve'
+      assign illustration = 'salve'
+      break
+    endif
+  endfor
+-%}
+
+<div class="product-illustration {{ illustration }}" aria-hidden="true">
+  {%- case illustration -%}
+    {%- when 'honey' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,8 62,22 62,50 40,64 18,50 18,22" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+        <polygon points="40,18 52,26 52,42 40,50 28,42 28,26" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
+        <circle cx="40" cy="34" r="6" fill="currentColor" opacity="0.4"/>
+        <path d="M36,60 Q40,72 44,60" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.2"/>
+      </svg>
+
+    {%- when 'candle' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="26" y="32" width="28" height="36" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+        <line x1="40" y1="32" x2="40" y2="24" stroke="currentColor" stroke-width="2"/>
+        <path d="M36,24 Q40,10 44,24" fill="currentColor" opacity="0.5"/>
+        <ellipse cx="40" cy="22" rx="4" ry="6" fill="currentColor" opacity="0.3"/>
+        <path d="M30,44 L50,44" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        <path d="M30,50 L50,50" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+      </svg>
+
+    {%- when 'tea' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22,36 L22,60 Q22,68 30,68 L50,68 Q58,68 58,60 L58,36" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08"/>
+        <path d="M58,42 Q68,42 68,52 Q68,58 58,58" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M32,28 Q34,18 36,28" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+        <path d="M40,26 Q42,14 44,26" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+        <path d="M48,28 Q50,20 52,28" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+        <path d="M28,36 L56,36" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        <path d="M44,50 Q50,44 56,50 Q50,56 44,50Z" fill="currentColor" opacity="0.15"/>
+      </svg>
+
+    {%- when 'tallow' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="24" y="30" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+        <path d="M24,38 Q40,34 56,38" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <ellipse cx="40" cy="30" rx="14" ry="4" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
+        <path d="M36,46 Q40,40 44,46 Q48,52 40,56 Q32,52 36,46Z" fill="currentColor" opacity="0.2"/>
+        <line x1="40" y1="44" x2="40" y2="52" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+      </svg>
+
+    {%- when 'elderberry' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32,24 L32,60 Q32,66 38,66 L42,66 Q48,66 48,60 L48,24" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08"/>
+        <ellipse cx="40" cy="24" rx="10" ry="4" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
+        <circle cx="36" cy="42" r="3" fill="currentColor" opacity="0.35"/>
+        <circle cx="44" cy="38" r="2.5" fill="currentColor" opacity="0.3"/>
+        <circle cx="40" cy="48" r="2.5" fill="currentColor" opacity="0.25"/>
+        <circle cx="44" cy="52" r="2" fill="currentColor" opacity="0.2"/>
+        <circle cx="36" cy="54" r="2" fill="currentColor" opacity="0.2"/>
+        <rect x="38" y="16" width="4" height="8" rx="2" fill="currentColor" opacity="0.3"/>
+      </svg>
+
+    {%- when 'salve' -%}
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="40" cy="48" rx="22" ry="8" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.08"/>
+        <path d="M18,42 L18,48" stroke="currentColor" stroke-width="2"/>
+        <path d="M62,42 L62,48" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="40" cy="42" rx="22" ry="8" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.12"/>
+        <path d="M18,36 L18,42" stroke="currentColor" stroke-width="2"/>
+        <path d="M62,36 L62,42" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="40" cy="36" rx="22" ry="8" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.15"/>
+        <path d="M34,32 Q36,24 40,28 Q44,24 46,32" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.1"/>
+        <line x1="40" y1="28" x2="40" y2="20" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        <path d="M38,20 Q40,16 42,20" fill="currentColor" opacity="0.2"/>
+      </svg>
+  {%- endcase -%}
+</div>

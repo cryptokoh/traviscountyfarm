@@ -1,0 +1,100 @@
+{{ 'component-customer.css' | asset_url | stylesheet_tag }}
+
+<section class="customer-section">
+  <div class="customer-section--wide">
+    <div class="customer-account-header">
+      <div>
+        <h1 class="customer-title">
+          {{ 'customer.account.title' | t }}
+        </h1>
+        <p class="customer-order-meta">
+          {{ customer.name }}
+          &middot;
+          {{ customer.email }}
+        </p>
+      </div>
+
+      <div class="customer-account-nav">
+        <a href="{{ routes.account_addresses_url }}" class="btn btn-secondary btn-sm">
+          {{ 'customer.account.addresses' | t }}
+        </a>
+        <a href="{{ routes.account_logout_url }}" class="btn btn-secondary btn-sm">
+          {{ 'customer.account.logout' | t }}
+        </a>
+      </div>
+    </div>
+
+    <h2 class="customer-address-form__title">{{ 'customer.account.orders' | t }}</h2>
+
+    {%- if customer.orders.size > 0 -%}
+      <table class="customer-table" role="table" aria-label="{{ 'customer.account.orders' | t }}">
+        <thead>
+          <tr>
+            <th scope="col">{{ 'customer.order.title' | t | remove: ' {{ name }}' | remove: '{{ name }}' | default: 'Order' }}</th>
+            <th scope="col">{{ 'customer.order.date' | t }}</th>
+            <th scope="col">{{ 'customer.order.payment_status' | t }}</th>
+            <th scope="col">{{ 'customer.order.fulfillment_status' | t }}</th>
+            <th scope="col">{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for order in customer.orders -%}
+            <tr>
+              <td data-label="Order">
+                <a href="{{ order.customer_url }}">{{ order.name }}</a>
+              </td>
+              <td data-label="{{ 'customer.order.date' | t }}">
+                {{ order.created_at | date: format: 'abbreviated_date' }}
+              </td>
+              <td data-label="{{ 'customer.order.payment_status' | t }}">
+                <span class="customer-status customer-status--{{ order.financial_status }}">
+                  {{ order.financial_status_label }}
+                </span>
+              </td>
+              <td data-label="{{ 'customer.order.fulfillment_status' | t }}">
+                <span class="customer-status customer-status--{{ order.fulfillment_status }}">
+                  {{ order.fulfillment_status_label }}
+                </span>
+              </td>
+              <td data-label="{{ 'customer.order.total' | t }}">
+                {{ order.total_price | money }}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      {%- if customer.orders.size > 20 -%}
+        {%- if paginate.pages > 1 -%}
+          <nav class="customer-pagination" role="navigation" aria-label="{{ 'general.pagination.next' | t }}">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="btn btn-secondary btn-sm">
+                {{ 'general.pagination.previous' | t }}
+              </a>
+            {%- endif -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="btn btn-secondary btn-sm">
+                {{ 'general.pagination.next' | t }}
+              </a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty-state">
+        <p>{{ 'customer.account.no_orders' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">
+          {{ 'cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Account",
+  "tag": "section",
+  "class": "section-customer-account"
+}
+{% endschema %}

@@ -1,0 +1,123 @@
+{{ 'component-blog.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign articles_per_page = section.settings.articles_per_page | default: 6
+-%}
+
+<section class="blog-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">{{ blog.title }}</h1>
+    </div>
+
+    {%- paginate blog.articles by articles_per_page -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="blog-grid">
+          {%- for article in blog.articles -%}
+            <article class="article-card">
+              {%- if article.image != blank -%}
+                <a href="{{ article.url }}" class="article-card__image-link">
+                  <img
+                    class="article-card__image"
+                    src="{{ article.image | image_url: width: 720 }}"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    width="720"
+                    height="{{ 720 | divided_by: article.image.aspect_ratio | round }}"
+                    loading="lazy"
+                  >
+                </a>
+              {%- endif -%}
+
+              <div class="article-card__content">
+                <h2 class="article-card__title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+
+                <div class="article-card__meta">
+                  <span class="article-card__author">{{ article.author }}</span>
+                  <span class="article-card__separator" aria-hidden="true">&middot;</span>
+                  <time class="article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                    {{ article.published_at | date: '%B %d, %Y' }}
+                  </time>
+                </div>
+
+                {%- if article.excerpt != blank -%}
+                  <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 160 }}</p>
+                {%- endif -%}
+
+                <a href="{{ article.url }}" class="article-card__link">
+                  {{ 'blogs.article.read_more' | t }}
+                  {% render 'icon-arrow' %}
+                </a>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.page' | t: number: paginate.current_page }}">
+            <ul class="pagination__list">
+              {%- if paginate.previous -%}
+                <li>
+                  <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev" aria-label="{{ 'general.pagination.previous' | t }}">
+                    &larr; {{ 'general.pagination.previous' | t }}
+                  </a>
+                </li>
+              {%- endif -%}
+
+              {%- for part in paginate.parts -%}
+                <li>
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" class="pagination__link" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                      {{ part.title }}
+                    </a>
+                  {%- else -%}
+                    {%- if part.title == paginate.current_page -%}
+                      <span class="pagination__link pagination__link--current" aria-current="page">
+                        {{ part.title }}
+                      </span>
+                    {%- else -%}
+                      <span class="pagination__link pagination__link--gap">{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+
+              {%- if paginate.next -%}
+                <li>
+                  <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next" aria-label="{{ 'general.pagination.next' | t }}">
+                    {{ 'general.pagination.next' | t }} &rarr;
+                  </a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <div class="empty-state">
+          <h2>No articles yet</h2>
+          <p>Check back soon for farm updates, recipes, and stories from the land.</p>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "section-blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "Articles per page",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6
+    }
+  ]
+}
+{% endschema %}

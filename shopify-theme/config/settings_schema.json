@@ -1,0 +1,315 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Travis County Farm",
+    "theme_version": "1.0.0",
+    "theme_author": "Travis County Farm",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (Honey Gold)",
+        "default": "#c8912e"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_light",
+        "label": "Primary light",
+        "default": "#daa84e"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_dark",
+        "label": "Primary dark",
+        "default": "#a67520"
+      },
+      {
+        "type": "header",
+        "content": "Secondary colors"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary (Farm Sage)",
+        "default": "#6b7c5e"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_light",
+        "label": "Secondary light",
+        "default": "#8a9e7a"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (Terracotta)",
+        "default": "#b5684a"
+      },
+      {
+        "type": "header",
+        "content": "Background colors"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background",
+        "default": "#faf8f4"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_alt",
+        "label": "Background alternate",
+        "default": "#f4f1eb"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_muted",
+        "label": "Background muted",
+        "default": "#ede9e3"
+      },
+      {
+        "type": "header",
+        "content": "Text colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#2d1f10"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Text secondary",
+        "default": "#5c4a3d"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Text muted",
+        "default": "#8b7355"
+      },
+      {
+        "type": "header",
+        "content": "Border colors"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border",
+        "default": "#e5ddd3"
+      },
+      {
+        "type": "color",
+        "id": "color_border_light",
+        "label": "Border light",
+        "default": "#f0ebe4"
+      },
+      {
+        "type": "header",
+        "content": "Semantic colors"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success",
+        "default": "#6b7c5e"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "Error",
+        "default": "#c45c4b"
+      },
+      {
+        "type": "color",
+        "id": "color_warning",
+        "label": "Warning",
+        "default": "#daa84e"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "cinzel_n6"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_accent",
+        "label": "Accent font (product titles)",
+        "default": "cormorant_garamond_n6"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "label": "Body font size scale",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      },
+      {
+        "type": "range",
+        "id": "font_heading_scale",
+        "label": "Heading font size scale",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "default": 1200,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "label": "Space between sections",
+        "min": 24,
+        "max": 120,
+        "step": 4,
+        "default": 96,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "border_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "default": 12,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer",
+        "info": "Drawer slides out from the right. Page redirects to /cart."
+      }
+    ]
+  },
+  {
+    "name": "Products",
+    "settings": [
+      {
+        "type": "select",
+        "id": "coming_soon_method",
+        "label": "Coming soon method",
+        "options": [
+          { "value": "tag", "label": "Product tag \"coming-soon\"" },
+          { "value": "metafield", "label": "Product metafield" }
+        ],
+        "default": "tag",
+        "info": "How to mark products as coming soon. Tag method is simplest."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_badges",
+        "label": "Show product badges",
+        "default": true,
+        "info": "Badges are driven by product tags: flagship, trending, new"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_illustrations",
+        "label": "Show SVG illustrations as image fallback",
+        "default": true,
+        "info": "When a product has no images, show an SVG illustration based on product type/tag."
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "info": "https://facebook.com/yourpage"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/yourhandle"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "X (Twitter)",
+        "info": "https://x.com/yourhandle"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@yourhandle"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube",
+        "info": "https://youtube.com/yourchannel"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "96x96px .png recommended. Will fall back to theme favicon.svg."
+      }
+    ]
+  }
+]

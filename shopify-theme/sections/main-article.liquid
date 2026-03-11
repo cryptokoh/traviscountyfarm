@@ -1,0 +1,136 @@
+{{ 'component-blog.css' | asset_url | stylesheet_tag }}
+
+<section class="article-section">
+  <div class="container">
+    <div class="article-wrapper">
+      <header class="article-header">
+        <h1 class="article-header__title">{{ article.title }}</h1>
+        <div class="article-header__meta">
+          <span class="article-header__author">{{ article.author }}</span>
+          <span class="article-header__separator" aria-hidden="true">&middot;</span>
+          <time class="article-header__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+            {{ article.published_at | date: '%B %d, %Y' }}
+          </time>
+        </div>
+      </header>
+
+      {%- if article.image != blank -%}
+        <div class="article-featured-image">
+          <img
+            src="{{ article.image | image_url: width: 1200 }}"
+            alt="{{ article.image.alt | default: article.title | escape }}"
+            width="1200"
+            height="{{ 1200 | divided_by: article.image.aspect_ratio | round }}"
+            loading="eager"
+          >
+        </div>
+      {%- endif -%}
+
+      <div class="rte article-body">
+        {{ article.content }}
+      </div>
+
+      {%- if article.tags.size > 0 -%}
+        <div class="article-tags">
+          {%- for tag in article.tags -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="article-back">
+        <a href="{{ blog.url }}" class="btn btn-secondary">
+          &larr; {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+        </a>
+      </div>
+
+      {%- if blog.comments_enabled? -%}
+        <div class="article-comments" id="comments">
+          <h2 class="article-comments__title">{{ 'blogs.comments.title' | t }}</h2>
+
+          {%- if article.comments_count > 0 -%}
+            <div class="comments-list">
+              {%- for comment in article.comments -%}
+                <div class="comment">
+                  <div class="comment__header">
+                    <span class="comment__author">{{ comment.author }}</span>
+                    <time class="comment__date" datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">
+                      {{ comment.created_at | date: '%B %d, %Y' }}
+                    </time>
+                  </div>
+                  <div class="comment__body rte">
+                    {{ comment.content }}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="comment-form-wrapper">
+            <h3 class="comment-form__title">{{ 'blogs.comments.leave_comment' | t }}</h3>
+
+            {%- form 'new_comment', article -%}
+              {%- if form.posted_successfully? -%}
+                <p class="form-success">{{ 'blogs.comments.moderated' | t }}</p>
+              {%- endif -%}
+
+              {%- if form.errors -%}
+                <div class="form-errors">
+                  {{ form.errors | default_errors }}
+                </div>
+              {%- endif -%}
+
+              <div class="comment-form__fields">
+                <div class="form-field">
+                  <label class="form-label" for="comment-author">{{ 'blogs.comments.name' | t }}</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="comment-author"
+                    name="comment[author]"
+                    value="{{ form.author }}"
+                    required
+                  >
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="comment-email">{{ 'blogs.comments.email' | t }}</label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="comment-email"
+                    name="comment[email]"
+                    value="{{ form.email }}"
+                    required
+                  >
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="comment-body">{{ 'blogs.comments.message' | t }}</label>
+                  <textarea
+                    class="form-textarea"
+                    id="comment-body"
+                    name="comment[body]"
+                    required
+                  >{{ form.body }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  {{ 'blogs.comments.post_comment' | t }}
+                </button>
+              </div>
+            {%- endform -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "section-article"
+}
+{% endschema %}

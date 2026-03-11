@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "What We Believe",
+        "text": "<p>At Travis County Farm, we believe the best products come from working with the land, not against it. Every jar of honey, every beeswax candle, and every herbal remedy is a reflection of what the earth provides when you treat it with care.</p><p>We are committed to sustainable, chemical-free farming practices that honor the cycles of nature and the hard work of our bees.</p>"
+      }
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "From Hive to Home",
+        "text": "<p>Our vertically integrated process means we oversee every step, from tending our hives and harvesting honey to hand-pouring candles and blending salves. Nothing leaves the farm without our personal stamp of quality.</p>",
+        "button_label": "Explore Our Products",
+        "button_link": "shopify:\/\/collections\/all",
+        "layout": "image_first"
+      }
+    }
+  },
+  "order": ["main", "rich-text", "image-with-text"]
+}

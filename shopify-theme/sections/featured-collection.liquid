@@ -1,0 +1,106 @@
+{{ 'component-card-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign limit = section.settings.products_to_show | default: 6
+-%}
+
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.subtitle != blank -%}
+        <span class="section-subtitle">{{ section.settings.subtitle }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="section-description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="products-grid">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: limit -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          <div class="product-card product-card--placeholder">
+            <div class="product-image">
+              {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <span class="product-category">Category</span>
+            <h3 class="product-title">Product Title</h3>
+            <p class="product-description">Product description goes here. A brief summary of what makes this product special.</p>
+            <div class="product-footer">
+              <span class="price__current">$0.00</span>
+              <span class="product-status">{{ 'products.product.coming_soon' | t }}</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all and collection != blank -%}
+      <div class="section-footer">
+        <a href="{{ collection.url }}" class="btn btn-secondary">
+          View All
+          {% render 'icon-arrow' %}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "What We Make"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Products"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Every jar, candle, and tin starts with what we grow and harvest right here on the farm. Our honey and beeswax form the foundation of a product line rooted in self-sufficiency."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

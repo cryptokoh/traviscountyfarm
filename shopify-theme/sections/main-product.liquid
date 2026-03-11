@@ -1,0 +1,185 @@
+{{ 'component-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign is_coming_soon = false
+
+  if settings.coming_soon_method == 'tag'
+    for tag in product.tags
+      if tag == 'coming-soon'
+        assign is_coming_soon = true
+        break
+      endif
+    endfor
+  elsif settings.coming_soon_method == 'metafield'
+    if product.metafields.custom.coming_soon == true
+      assign is_coming_soon = true
+    endif
+  endif
+
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_variants = false
+  if product.variants.size > 1
+    assign has_variants = true
+  endif
+-%}
+
+<section class="product-page">
+  <div class="container">
+    <div class="product-detail">
+
+      {%- comment -%} Image Gallery {%- endcomment -%}
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- if product.featured_image != blank -%}
+            <img
+              id="ProductMainImage"
+              src="{{ current_variant.featured_image | default: product.featured_image | image_url: width: 800 }}"
+              alt="{{ current_variant.featured_image.alt | default: product.featured_image.alt | escape }}"
+              width="800"
+              height="{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}"
+              loading="eager"
+            >
+          {%- elsif settings.show_product_illustrations -%}
+            <div class="product-gallery__illustration">
+              {% render 'product-illustration', product: product %}
+            </div>
+          {%- else -%}
+            <div class="product-gallery__placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs" role="list" aria-label="{{ product.title }} images">
+            {%- for image in product.images -%}
+              <button
+                type="button"
+                class="product-gallery__thumb{% if forloop.first %} product-gallery__thumb--active{% endif %}"
+                data-image-url="{{ image | image_url: width: 800 }}"
+                data-image-alt="{{ image.alt | escape }}"
+                aria-label="View image {{ forloop.index }} of {{ product.images.size }}"
+                role="listitem"
+              >
+                <img
+                  src="{{ image | image_url: width: 120 }}"
+                  alt="{{ image.alt | escape }}"
+                  width="120"
+                  height="{{ 120 | divided_by: image.aspect_ratio | round }}"
+                  loading="lazy"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product Info {%- endcomment -%}
+      <div class="product-info">
+        {% render 'product-badge', product: product %}
+
+        {%- if is_coming_soon -%}
+          <span class="product-info__coming-soon">{{ 'products.product.coming_soon' | t }}</span>
+        {%- endif -%}
+
+        {%- if product.vendor != blank -%}
+          <p class="product-info__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="product-info__title">{{ product.title }}</h1>
+
+        <div class="product-info__price">
+          {% render 'price', product: product %}
+        </div>
+
+        {%- unless is_coming_soon -%}
+          {%- form 'product', product, id: 'ProductForm', class: 'product-form', data-product-form: '' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
+
+            {%- if has_variants -%}
+              <div class="product-form__field">
+                <label class="form-label" for="ProductVariantSelect">
+                  {{ 'products.product.quantity' | t | split: ' ' | first | append: ' option' }}
+                </label>
+                <select
+                  id="ProductVariantSelect"
+                  name="id"
+                  class="form-select product-form__variant-select"
+                  data-variant-select
+                >
+                  {%- for variant in product.variants -%}
+                    <option
+                      value="{{ variant.id }}"
+                      {% if variant == current_variant %}selected{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                      data-price="{{ variant.price }}"
+                      {% if variant.compare_at_price > variant.price %}
+                        data-compare-price="{{ variant.compare_at_price }}"
+                      {% endif %}
+                      {% if variant.featured_image %}
+                        data-image-url="{{ variant.featured_image | image_url: width: 800 }}"
+                        data-image-alt="{{ variant.featured_image.alt | escape }}"
+                      {% endif %}
+                    >
+                      {{ variant.title }}{% unless variant.available %} - {{ 'products.product.sold_out' | t }}{% endunless %}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endif -%}
+
+            <div class="product-form__field">
+              <label class="form-label" for="ProductQuantity">{{ 'products.product.quantity' | t }}</label>
+              <div class="product-form__quantity">
+                <button type="button" class="product-form__qty-btn" data-qty-minus aria-label="Decrease quantity">-</button>
+                <input
+                  type="number"
+                  id="ProductQuantity"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  class="form-input product-form__qty-input"
+                  aria-label="{{ 'products.product.quantity' | t }}"
+                >
+                <button type="button" class="product-form__qty-btn" data-qty-plus aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg btn-full product-form__submit"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {% render 'icon-cart' %}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+        {%- endunless -%}
+
+        {%- if product.description != blank -%}
+          <div class="product-info__description">
+            <h2 class="product-info__description-heading">{{ 'products.product.description' | t }}</h2>
+            <div class="rte">
+              {{ product.description }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'product-form.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "tag": "section",
+  "class": "section-main-product"
+}
+{% endschema %}

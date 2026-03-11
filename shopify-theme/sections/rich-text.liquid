@@ -1,0 +1,43 @@
+{{ 'component-rich-text.css' | asset_url | stylesheet_tag }}
+
+<section class="rich-text-section">
+  <div class="container">
+    <div class="rich-text-inner">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="rich-text-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte rich-text-content">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "tag": "section",
+  "class": "section-rich-text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Story"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Share your brand story with your customers. Describe a product, make announcements, or welcome visitors to your store.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text"
+    }
+  ]
+}
+{% endschema %}

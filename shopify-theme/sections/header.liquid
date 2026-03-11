@@ -1,0 +1,78 @@
+{{ 'component-header.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign logo_width = section.settings.logo_width | default: 28
+-%}
+
+<nav class="nav" id="nav" data-section-id="{{ section.id }}">
+  <div class="nav-container">
+    <a href="{{ routes.root_url }}" class="nav-logo" aria-label="{{ shop.name }}">
+      <div class="logo-icon" style="width: {{ logo_width }}px; height: {{ logo_width }}px;">
+        {% render 'icon-logo' %}
+      </div>
+      <span class="logo-text">{{ shop.name }}</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %}">
+          {{ link.title }}
+        </a>
+      {%- endfor -%}
+    </div>
+
+    <div class="nav-actions">
+      <a href="{{ routes.search_url }}" class="nav-action-btn" aria-label="{{ 'general.search' | t }}">
+        <span class="nav-action-icon">{% render 'icon-search' %}</span>
+      </a>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="nav-action-btn" aria-label="{{ 'general.account' | t }}">
+          <span class="nav-action-icon">{% render 'icon-account' %}</span>
+        </a>
+      {%- endif -%}
+
+      <button
+        class="nav-action-btn nav-cart-btn"
+        aria-label="{{ 'general.cart' | t }}"
+        data-cart-toggle
+      >
+        <span class="nav-action-icon">{% render 'icon-cart' %}</span>
+        <span class="nav-cart-count{% if cart.item_count == 0 %} hidden{% endif %}" data-cart-count>
+          {{ cart.item_count }}
+        </span>
+      </button>
+
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="{{ 'accessibility.toggle_menu' | t }}" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo icon size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    }
+  ]
+}
+{% endschema %}

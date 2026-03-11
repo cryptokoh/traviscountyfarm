@@ -1,0 +1,111 @@
+{{ 'component-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-card-product.css' | asset_url | stylesheet_tag }}
+
+<section class="collection-page">
+  <div class="container">
+
+    <div class="collection-header">
+      <h1 class="collection-header__title">{{ 'collections.all' | t }}</h1>
+    </div>
+
+    {%- if collections.size > 0 -%}
+      <div class="products-grid collection-grid">
+        {%- for collection in collections -%}
+          <a href="{{ collection.url }}" class="collection-card">
+            <div class="collection-card__image-wrapper">
+              {%- if collection.image -%}
+                <img
+                  src="{{ collection.image | image_url: width: 600 }}"
+                  alt="{{ collection.title | escape }}"
+                  width="600"
+                  height="{{ 600 | divided_by: collection.image.aspect_ratio | round }}"
+                  loading="lazy"
+                  class="collection-card__image"
+                >
+              {%- else -%}
+                <div class="collection-card__placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                    <rect x="2" y="2" width="20" height="20" rx="3"/>
+                    <path d="M7 7h10M7 12h10M7 17h6"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="collection-card__info">
+              <h2 class="collection-card__title">{{ collection.title }}</h2>
+              <p class="collection-card__count">{{ collection.products_count }} {{ 'collections.product_count' | t | default: 'products' }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty-state">
+        <h2>{{ 'collections.empty' | t }}</h2>
+        <a href="{{ routes.root_url }}" class="btn btn-primary">
+          {{ 'cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<style>
+  .collection-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+  .collection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .collection-card__image-wrapper {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+  }
+  .collection-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .collection-card:hover .collection-card__image {
+    transform: scale(1.05);
+  }
+  .collection-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+  }
+  .collection-card__info {
+    padding: var(--spacing-lg);
+  }
+  .collection-card__title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-heading-weight);
+    margin-bottom: var(--spacing-xs);
+  }
+  .collection-card__count {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "class": "section-list-collections"
+}
+{% endschema %}

@@ -1,0 +1,132 @@
+{{ 'component-search.css' | asset_url | stylesheet_tag }}
+
+<section class="search-section">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="section-title">{{ 'search.title' | t }}</h1>
+    </div>
+
+    <div class="search-form-wrapper">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+        <label class="visually-hidden" for="search-input">{{ 'search.title' | t }}</label>
+        <div class="search-form__inner">
+          <span class="search-form__icon" aria-hidden="true">
+            {% render 'icon-search' %}
+          </span>
+          <input
+            class="search-form__input form-input"
+            type="search"
+            id="search-input"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'search.placeholder' | t }}"
+          >
+          <button type="submit" class="btn btn-primary search-form__submit">
+            {{ 'search.title' | t }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      <div class="search-results">
+        {%- if search.results_count > 0 -%}
+          <p class="search-results__count">
+            {{ 'search.results_count' | t: count: search.results_count }}
+            for &ldquo;{{ search.terms }}&rdquo;
+          </p>
+
+          <div class="search-results__grid">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- else -%}
+                <div class="search-result-item">
+                  {%- if item.image != blank -%}
+                    <a href="{{ item.url }}" class="search-result-item__image-link">
+                      <img
+                        class="search-result-item__image"
+                        src="{{ item.image | image_url: width: 120 }}"
+                        alt="{{ item.image.alt | default: item.title | escape }}"
+                        width="120"
+                        height="{{ 120 | divided_by: item.image.aspect_ratio | round }}"
+                        loading="lazy"
+                      >
+                    </a>
+                  {%- endif -%}
+                  <div class="search-result-item__content">
+                    <span class="search-result-item__type">{{ item.object_type | capitalize }}</span>
+                    <h3 class="search-result-item__title">
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                    </h3>
+                    {%- if item.content != blank -%}
+                      <p class="search-result-item__excerpt">{{ item.content | strip_html | truncate: 140 }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if search.results.size < search.results_count -%}
+            <div class="search-results__pagination">
+              {%- paginate search.results by 12 -%}
+                {%- if paginate.pages > 1 -%}
+                  <nav class="pagination" role="navigation">
+                    <ul class="pagination__list">
+                      {%- if paginate.previous -%}
+                        <li>
+                          <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev">
+                            &larr; {{ 'general.pagination.previous' | t }}
+                          </a>
+                        </li>
+                      {%- endif -%}
+
+                      {%- for part in paginate.parts -%}
+                        <li>
+                          {%- if part.is_link -%}
+                            <a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a>
+                          {%- else -%}
+                            {%- if part.title == paginate.current_page -%}
+                              <span class="pagination__link pagination__link--current" aria-current="page">{{ part.title }}</span>
+                            {%- else -%}
+                              <span class="pagination__link pagination__link--gap">{{ part.title }}</span>
+                            {%- endif -%}
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+
+                      {%- if paginate.next -%}
+                        <li>
+                          <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next">
+                            {{ 'general.pagination.next' | t }} &rarr;
+                          </a>
+                        </li>
+                      {%- endif -%}
+                    </ul>
+                  </nav>
+                {%- endif -%}
+              {%- endpaginate -%}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="empty-state">
+            <h2>{{ 'search.no_results' | t: terms: search.terms }}</h2>
+            <p>Try checking your spelling or using more general terms.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary">
+              {{ 'cart.continue_shopping' | t }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "tag": "section",
+  "class": "section-search"
+}
+{% endschema %}

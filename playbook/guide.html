@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travis County Farm - Shopify Store Setup Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS Custom Properties ===== */
+    :root {
+      --honey-gold: #c8912e;
+      --honey-gold-light: #e8be6a;
+      --honey-gold-pale: #f5e6c8;
+      --farm-sage: #6b7c5e;
+      --farm-sage-light: #8fa seventeen;
+      --farm-sage-pale: #e8ede3;
+      --terracotta: #b5684a;
+      --terracotta-light: #d4927a;
+      --terracotta-pale: #f2ddd4;
+      --warm-cream: #faf8f4;
+      --warm-cream-dark: #f0ece4;
+      --text-primary: #2d1f10;
+      --text-secondary: #5a4a3a;
+      --text-muted: #8a7a6a;
+      --white: #ffffff;
+      --border-light: #e8e2d8;
+      --shadow-sm: 0 1px 3px rgba(45, 31, 16, 0.08);
+      --shadow-md: 0 4px 12px rgba(45, 31, 16, 0.1);
+      --shadow-lg: 0 8px 24px rgba(45, 31, 16, 0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --font-display: 'Cinzel', serif;
+      --font-accent: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+      --sidebar-width: 280px;
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background-color: var(--warm-cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== Layout ===== */
+    .playbook-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ===== Sidebar / Table of Contents ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--white);
+      border-right: 1px solid var(--border-light);
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-header {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(135deg, var(--warm-cream) 0%, var(--white) 100%);
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar-logo svg {
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo-text {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+
+    .sidebar-subtitle {
+      font-family: var(--font-accent);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .toc-nav {
+      padding: 16px 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .toc-section-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 24px 6px;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 400;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .toc-link:hover {
+      background: var(--warm-cream);
+      color: var(--text-primary);
+      border-left-color: var(--honey-gold-light);
+    }
+
+    .toc-link.active {
+      background: var(--honey-gold-pale);
+      color: var(--honey-gold);
+      font-weight: 600;
+      border-left-color: var(--honey-gold);
+    }
+
+    .toc-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--warm-cream-dark);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .toc-link:hover .toc-number,
+    .toc-link.active .toc-number {
+      background: var(--honey-gold);
+      color: var(--white);
+    }
+
+    .sidebar-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-light);
+      background: var(--warm-cream);
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer p {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ===== Mobile Sidebar Toggle ===== */
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--honey-gold);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      z-index: 200;
+      box-shadow: var(--shadow-lg);
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    .sidebar-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 31, 16, 0.4);
+      z-index: 90;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ===== Main Content ===== */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      max-width: 820px;
+      padding: 40px 48px 80px;
+    }
+
+    /* ===== Cover / Title ===== */
+    .cover {
+      text-align: center;
+      padding: 48px 32px 56px;
+      margin-bottom: 48px;
+      background: linear-gradient(135deg, var(--white) 0%, var(--warm-cream) 50%, var(--honey-gold-pale) 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--honey-gold), var(--farm-sage), var(--terracotta), var(--honey-gold));
+    }
+
+    .cover-icon {
+      margin-bottom: 20px;
+    }
+
+    .cover h1 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .cover-tagline {
+      font-family: var(--font-accent);
+      font-size: 20px;
+      font-style: italic;
+      color: var(--honey-gold);
+      margin-bottom: 20px;
+    }
+
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cover-meta-item {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cover-meta-item svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.6;
+    }
+
+    /* ===== Section Styles ===== */
+    .section {
+      margin-bottom: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    .section-divider-icon {
+      display: flex;
+      gap: 4px;
+    }
+
+    .honeycomb-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--honey-gold-light);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .honeycomb-dot:nth-child(2) {
+      background: var(--honey-gold);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--honey-gold), var(--honey-gold-light));
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(200, 145, 46, 0.3);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== Content Typography ===== */
+    .content p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    .content h3 {
+      font-family: var(--font-accent);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .content h4 {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 24px 0 10px;
+    }
+
+    .content ul, .content ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .content li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    .content li::marker {
+      color: var(--honey-gold);
+    }
+
+    .content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ===== Inline Code ===== */
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 13px;
+      background: var(--honey-gold-pale);
+      color: var(--terracotta);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(200, 145, 46, 0.2);
+      white-space: nowrap;
+    }
+
+    /* ===== Step Lists ===== */
+    .steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step-counter;
+      margin-bottom: 20px;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .steps li:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--honey-gold), var(--honey-gold-light));
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .steps li .step-content {
+      flex: 1;
+    }
+
+    /* ===== Callout Boxes ===== */
+    .callout {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin: 20px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .callout-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 13px;
+      margin-top: 1px;
+    }
+
+    .callout-content {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout-content strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .callout-tip {
+      background: #f0f5eb;
+      border: 1px solid #d4e0ca;
+      border-left: 4px solid var(--farm-sage);
+    }
+
+    .callout-tip .callout-icon {
+      background: var(--farm-sage);
+      color: var(--white);
+    }
+
+    .callout-tip strong {
+      color: var(--farm-sage);
+    }
+
+    .callout-warning {
+      background: #fdf5ec;
+      border: 1px solid #f0dcc5;
+      border-left: 4px solid var(--terracotta);
+    }
+
+    .callout-warning .callout-icon {
+      background: var(--terracotta);
+      color: var(--white);
+    }
+
+    .callout-warning strong {
+      color: var(--terracotta);
+    }
+
+    .callout-info {
+      background: var(--honey-gold-pale);
+      border: 1px solid rgba(200, 145, 46, 0.25);
+      border-left: 4px solid var(--honey-gold);
+    }
+
+    .callout-info .callout-icon {
+      background: var(--honey-gold);
+      color: var(--white);
+    }
+
+    .callout-info strong {
+      color: var(--honey-gold);
+    }
+
+    /* ===== Navigation Paths ===== */
+    .nav-path {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      margin: 2px 0;
+    }
+
+    .nav-path .nav-arrow {
+      color: var(--honey-gold);
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    /* ===== Tag Badges ===== */
+    .tag-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .tag-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+
+    .tag-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .tag-badge.coming-soon {
+      background: #f0f5eb;
+      color: var(--farm-sage);
+      border: 1px solid #c5d4b8;
+    }
+
+    .tag-badge.flagship {
+      background: var(--honey-gold-pale);
+      color: var(--honey-gold);
+      border: 1px solid rgba(200, 145, 46, 0.3);
+    }
+
+    .tag-badge.trending {
+      background: var(--terracotta-pale);
+      color: var(--terracotta);
+      border: 1px solid rgba(181, 104, 74, 0.3);
+    }
+
+    .tag-badge.new-tag {
+      background: #e8ede3;
+      color: #4a5d3e;
+      border: 1px solid #b5c7a8;
+    }
+
+    .tag-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== Product Types Table ===== */
+    .product-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .product-type {
+      padding: 10px 16px;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .product-type:hover {
+      border-color: var(--honey-gold);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ===== FAQ Section ===== */
+    .faq-item {
+      margin-bottom: 16px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+      background: var(--warm-cream);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: default;
+    }
+
+    .faq-question .q-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--honey-gold);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      padding: 14px 20px 14px 54px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .faq-answer code {
+      font-size: 12px;
+    }
+
+    /* ===== Keyboard Shortcut Style ===== */
+    kbd {
+      display: inline-block;
+      padding: 2px 7px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-primary);
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+
+    /* ===== Section Honeycomb Divider Pattern ===== */
+    .honeycomb-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 0;
+      margin: 0 0 8px;
+    }
+
+    .hex {
+      width: 10px;
+      height: 10px;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .hex-1 { background: var(--honey-gold-pale); }
+    .hex-2 { background: var(--honey-gold-light); }
+    .hex-3 { background: var(--honey-gold); }
+    .hex-4 { background: var(--honey-gold-light); }
+    .hex-5 { background: var(--honey-gold-pale); }
+
+    /* ===== Responsive Design ===== */
+    @media (max-width: 1024px) {
+      .main-content {
+        max-width: none;
+        padding: 32px 32px 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar-overlay.open {
+        display: block;
+      }
+
+      .sidebar-toggle {
+        display: flex;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 24px 20px 100px;
+      }
+
+      .cover {
+        padding: 32px 20px 40px;
+      }
+
+      .cover h1 {
+        font-size: 22px;
+      }
+
+      .cover-tagline {
+        font-size: 17px;
+      }
+
+      .section-header {
+        gap: 12px;
+      }
+
+      .section-number {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 19px;
+      }
+
+      .cover-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .product-types {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-path {
+        font-size: 12px;
+      }
+    }
+
+    /* ===== Print Styles ===== */
+    @media print {
+      body {
+        background: white;
+        font-size: 12px;
+        color: #000;
+      }
+
+      .sidebar,
+      .sidebar-toggle,
+      .sidebar-overlay {
+        display: none !important;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 0;
+        max-width: none;
+      }
+
+      .playbook-wrapper {
+        display: block;
+      }
+
+      .cover {
+        border: 2px solid #ccc;
+        page-break-after: always;
+      }
+
+      .cover::before {
+        display: none;
+      }
+
+      .section {
+        page-break-inside: avoid;
+      }
+
+      .section-divider {
+        border-top: 1px solid #ccc;
+        padding-top: 16px;
+      }
+
+      .steps li,
+      .callout,
+      .faq-item,
+      .tag-list li {
+        break-inside: avoid;
+        border-color: #ccc;
+      }
+
+      .callout-tip {
+        border-left-color: #666;
+        background: #f5f5f5;
+      }
+
+      .callout-warning {
+        border-left-color: #999;
+        background: #f9f9f9;
+      }
+
+      .callout-info {
+        border-left-color: #888;
+        background: #fafafa;
+      }
+
+      .section-number {
+        background: #666 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .steps li::before {
+        background: #888 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      code {
+        border-color: #ccc;
+        background: #f0f0f0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .honeycomb-divider,
+      .section-divider-icon {
+        display: none;
+      }
+
+      h3 {
+        page-break-after: avoid;
+      }
+    }
+
+    /* ===== Scrollbar Styling ===== */
+    .sidebar::-webkit-scrollbar,
+    .toc-nav::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-track,
+    .toc-nav::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb,
+    .toc-nav::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover,
+    .toc-nav::-webkit-scrollbar-thumb:hover {
+      background: var(--honey-gold-light);
+    }
+
+    /* ===== Selection Color ===== */
+    ::selection {
+      background: var(--honey-gold-pale);
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="playbook-wrapper">
+
+    <!-- ===== Sidebar / Table of Contents ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <!-- TCF Honeycomb Icon -->
+          <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 0L34.5 9.5V28.5L18 38L1.5 28.5V9.5L18 0Z" fill="#c8912e" opacity="0.15"/>
+            <path d="M18 4L30.5 11.2V25.8L18 33L5.5 25.8V11.2L18 4Z" fill="#c8912e" opacity="0.3"/>
+            <path d="M18 8L26.5 13V24L18 29L9.5 24V13L18 8Z" fill="#c8912e" opacity="0.5"/>
+            <path d="M18 12L22.5 14.8V22.2L18 25L13.5 22.2V14.8L18 12Z" fill="#c8912e"/>
+            <circle cx="18" cy="18.5" r="3" fill="#faf8f4"/>
+          </svg>
+          <div>
+            <div class="sidebar-logo-text">Travis County Farm</div>
+            <div class="sidebar-subtitle">Shopify Playbook</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="toc-nav" id="tocNav">
+        <div class="toc-section-label">Getting Started</div>
+        <a href="#welcome" class="toc-link active">
+          <span class="toc-number">1</span>
+          Welcome & Overview
+        </a>
+        <a href="#getting-started" class="toc-link">
+          <span class="toc-number">2</span>
+          Getting Started
+        </a>
+
+        <div class="toc-section-label">Store Management</div>
+        <a href="#products" class="toc-link">
+          <span class="toc-number">3</span>
+          Managing Products
+        </a>
+        <a href="#customizing" class="toc-link">
+          <span class="toc-number">4</span>
+          Customizing Your Store
+        </a>
+        <a href="#orders" class="toc-link">
+          <span class="toc-number">5</span>
+          Orders & Fulfillment
+        </a>
+
+        <div class="toc-section-label">Communication</div>
+        <a href="#email" class="toc-link">
+          <span class="toc-number">6</span>
+          Email & Customers
+        </a>
+        <a href="#pages" class="toc-link">
+          <span class="toc-number">7</span>
+          Pages & Blog
+        </a>
+
+        <div class="toc-section-label">Configuration</div>
+        <a href="#settings" class="toc-link">
+          <span class="toc-number">8</span>
+          Settings & Payments
+        </a>
+        <a href="#faq" class="toc-link">
+          <span class="toc-number">9</span>
+          FAQ & Troubleshooting
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Travis County Farm<br>Shopify Setup Playbook v1.0</p>
+      </div>
+    </aside>
+
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- Mobile toggle button -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle table of contents">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main-content">
+
+      <!-- Cover -->
+      <header class="cover">
+        <div class="cover-icon">
+          <svg width="56" height="62" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 0L34.5 9.5V28.5L18 38L1.5 28.5V9.5L18 0Z" fill="#c8912e" opacity="0.12"/>
+            <path d="M18 4L30.5 11.2V25.8L18 33L5.5 25.8V11.2L18 4Z" fill="#c8912e" opacity="0.25"/>
+            <path d="M18 8L26.5 13V24L18 29L9.5 24V13L18 8Z" fill="#c8912e" opacity="0.45"/>
+            <path d="M18 12L22.5 14.8V22.2L18 25L13.5 22.2V14.8L18 12Z" fill="#c8912e"/>
+            <circle cx="18" cy="18.5" r="3" fill="#faf8f4"/>
+          </svg>
+        </div>
+        <h1>TRAVIS COUNTY FARM</h1>
+        <p class="cover-tagline">Shopify Store Setup Playbook</p>
+        <div class="cover-meta">
+          <span class="cover-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Version 1.0
+          </span>
+          <span class="cover-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            In-Person Setup Guide
+          </span>
+          <span class="cover-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ~45 min read
+          </span>
+        </div>
+      </header>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 1: Welcome & Overview             -->
+      <!-- ========================================= -->
+      <section class="section" id="welcome">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">1</span>
+          <h2 class="section-title">Welcome & Overview</h2>
+        </div>
+        <div class="content">
+          <p>Welcome to your Travis County Farm Shopify store. This playbook will walk you through everything you need to know to manage your online presence -- from adding products and processing orders to customizing your storefront and engaging with customers.</p>
+
+          <h3>What Is Shopify?</h3>
+          <p>Shopify is a complete e-commerce platform that handles your online store, payment processing, shipping, and inventory all in one place. Think of it as your digital farm stand -- it is always open, always accepting orders, and always keeping track of your stock.</p>
+          <p>Your TCF store uses a <strong>custom-built theme</strong> designed to reflect the warmth and authenticity of your brand. The farmhouse-meets-apothecary aesthetic carries through every page, from product cards to the checkout experience.</p>
+
+          <h3>Understanding Shopify 2.0</h3>
+          <p>Your theme is built on <strong>Shopify 2.0</strong>, which introduces a powerful concept: <strong>sections and blocks</strong>.</p>
+          <ul>
+            <li><strong>Sections</strong> are the big building blocks of each page -- a hero banner, a product grid, a newsletter signup. You can add, remove, and reorder them.</li>
+            <li><strong>Blocks</strong> are the smaller pieces inside a section -- a single statistic in the hero, an icon in the about section, a menu item in the footer.</li>
+          </ul>
+          <p>This means you can customize every page of your store visually, without touching any code.</p>
+
+          <h3>Theme Editor vs. Admin</h3>
+          <div class="callout callout-info">
+            <span class="callout-icon">i</span>
+            <div class="callout-content">
+              <strong>Key Distinction</strong>
+              There are two main areas you will work in. The <strong>Admin</strong> is where you manage products, orders, customers, and settings. The <strong>Theme Editor</strong> is where you customize how your store looks -- layout, colors, text, and images. You will use both regularly.
+            </div>
+          </div>
+          <ul>
+            <li><strong>Admin</strong> (yourstore.myshopify.com/admin) -- Your operational headquarters. Add products, process orders, view analytics, configure settings.</li>
+            <li><strong>Theme Editor</strong> (Online Store &gt; Themes &gt; Customize) -- Your design studio. Drag sections, edit text, adjust colors, preview changes before publishing.</li>
+          </ul>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 2: Getting Started                -->
+      <!-- ========================================= -->
+      <section class="section" id="getting-started">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">2</span>
+          <h2 class="section-title">Getting Started</h2>
+        </div>
+        <div class="content">
+
+          <h3>Logging In</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Open your browser and go to <strong>yourstore.myshopify.com/admin</strong> (replace "yourstore" with your actual Shopify store name).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enter the <strong>email address</strong> associated with your Shopify account.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enter your <strong>password</strong>. If you have two-factor authentication enabled, you will also need your authentication code.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                You will land on the <strong>Admin Dashboard</strong> -- your home base for everything.
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Tip</strong>
+              Bookmark your admin URL for quick access. You can also download the <strong>Shopify mobile app</strong> (iOS/Android) to manage orders and view sales on the go.
+            </div>
+          </div>
+
+          <h3>Navigating the Admin Dashboard</h3>
+          <p>The admin dashboard has a <strong>left sidebar menu</strong> with all the major sections you will need:</p>
+          <ul>
+            <li><strong>Home</strong> -- Dashboard overview with recent activity, sales stats, and quick actions</li>
+            <li><strong>Orders</strong> -- All incoming orders, fulfillment status, and order history</li>
+            <li><strong>Products</strong> -- Your product catalog, inventory, collections, and gift cards</li>
+            <li><strong>Customers</strong> -- Customer accounts, newsletter subscribers, and contact info</li>
+            <li><strong>Content</strong> -- Blog posts, pages, and other content management</li>
+            <li><strong>Analytics</strong> -- Sales reports, traffic data, and business insights</li>
+            <li><strong>Marketing</strong> -- Campaigns, automations, and Shopify Email</li>
+            <li><strong>Discounts</strong> -- Discount codes and automatic discounts</li>
+            <li><strong>Online Store</strong> -- Theme customization, navigation, domains, and preferences</li>
+            <li><strong>Settings</strong> -- Store details, payments, shipping, taxes, and more</li>
+          </ul>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">i</span>
+            <div class="callout-content">
+              <strong>Quick Navigation</strong>
+              Press <kbd>/</kbd> anywhere in the admin to open the <strong>search bar</strong>. Type what you are looking for -- a product name, a setting, an order number -- and Shopify will find it instantly.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 3: Managing Products              -->
+      <!-- ========================================= -->
+      <section class="section" id="products">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">3</span>
+          <h2 class="section-title">Managing Products</h2>
+        </div>
+        <div class="content">
+
+          <h3>Adding a New Product</h3>
+          <p>Navigate to <span class="nav-path">Products <span class="nav-arrow">&rsaquo;</span> Add product</span> and fill out the following fields:</p>
+
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                <strong>Title</strong> -- The product name customers will see. Keep it clear and descriptive (e.g., "Wildflower Raw Honey - 16oz").
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Description</strong> -- Write a compelling product description. Include ingredients, benefits, usage instructions, and the story behind the product. This text supports basic formatting (bold, lists, links).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Media</strong> -- Upload product images. Use high-quality photos with consistent lighting. Square images (1:1 ratio) work best. The first image will be the main product photo shown on collection pages.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Price</strong> -- Set the current selling price. If you want to show a sale badge, also set the <strong>Compare at price</strong> (see below).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Product type</strong> -- Select from the TCF product types (Honey, Beeswax, Herbal, Skincare, Wellness). This helps with organization and filtering.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Tags</strong> -- Add relevant tags for badges, filtering, and features (see the tag reference below).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Status</strong> -- Set to "Active" when ready to sell, or "Draft" while still working on the listing.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Save</strong> to publish your product.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Product Images</h3>
+          <p>Upload real product photos whenever possible. If a product does not yet have photography, the TCF theme includes <strong>SVG illustration fallbacks</strong> that display a beautiful hand-drawn style illustration in place of a photo. These are built into the theme and appear automatically when no product image is set.</p>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Image Best Practices</strong>
+              Use square images (2048x2048px recommended). Keep file sizes under 2MB. Use natural lighting when possible. Show the product clearly against a clean background. Multiple angles help customers make decisions.
+            </div>
+          </div>
+
+          <h3>Setting Prices & Sale Badges</h3>
+          <p>Every product has two price fields:</p>
+          <ul>
+            <li><strong>Price</strong> -- The actual selling price your customer pays.</li>
+            <li><strong>Compare at price</strong> -- The original/regular price. When this is set <em>higher</em> than the Price, the theme automatically shows a <strong>Sale badge</strong> and displays the discount.</li>
+          </ul>
+          <p>For example: Set Price to <strong>$18.00</strong> and Compare at price to <strong>$24.00</strong>. The product card will show "Sale" with the original price crossed out.</p>
+
+          <h3>Product Tags for Special Features</h3>
+          <p>Your TCF theme uses specific tags to control badges and product behavior. Add these tags in the Tags field when editing a product:</p>
+
+          <ul class="tag-list">
+            <li>
+              <span class="tag-badge coming-soon">coming-soon</span>
+              <span class="tag-desc">Marks the product as "Coming Soon." The Add to Cart button is replaced with a Coming Soon notice. Use this for products you want to showcase before they are available for purchase.</span>
+            </li>
+            <li>
+              <span class="tag-badge flagship">flagship</span>
+              <span class="tag-desc">Displays a golden <strong>Flagship</strong> badge on the product card. Use this for your signature products -- the ones that define the TCF brand.</span>
+            </li>
+            <li>
+              <span class="tag-badge trending">trending</span>
+              <span class="tag-desc">Displays a <strong>Trending</strong> badge on the product card. Use this for best-sellers or products experiencing high demand.</span>
+            </li>
+            <li>
+              <span class="tag-badge new-tag">new</span>
+              <span class="tag-desc">Displays a <strong>New</strong> badge on the product card. Use this for recently launched products to draw attention.</span>
+            </li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">!</span>
+            <div class="callout-content">
+              <strong>Important</strong>
+              Tags are case-sensitive. Always use lowercase: <code>coming-soon</code>, <code>flagship</code>, <code>trending</code>, <code>new</code>. Capitalized versions like "Coming-Soon" will not work.
+            </div>
+          </div>
+
+          <h3>Product Types</h3>
+          <p>Use these standard product types for consistent organization across your store:</p>
+          <div class="product-types">
+            <div class="product-type">Honey</div>
+            <div class="product-type">Beeswax</div>
+            <div class="product-type">Herbal</div>
+            <div class="product-type">Skincare</div>
+            <div class="product-type">Wellness</div>
+          </div>
+
+          <h3>Inventory & Variants</h3>
+          <p>If a product comes in multiple sizes or options (e.g., 8oz and 16oz jars), use <strong>Variants</strong>:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                In the product editor, scroll to the <strong>Variants</strong> section.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Add options like size or color</strong>. Name the option (e.g., "Size") and add values (e.g., "8oz", "16oz").
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Each variant can have its own <strong>price</strong>, <strong>SKU</strong>, <strong>inventory quantity</strong>, and <strong>image</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enable <strong>Track quantity</strong> for each variant to manage inventory. Shopify will warn you when stock is low.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 4: Customizing Your Store         -->
+      <!-- ========================================= -->
+      <section class="section" id="customizing">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">4</span>
+          <h2 class="section-title">Customizing Your Store</h2>
+        </div>
+        <div class="content">
+
+          <h3>Opening the Theme Editor</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                In your Shopify admin, go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Themes</span>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Find your active (published) theme and click the <strong>Customize</strong> button.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                The Theme Editor opens with a <strong>live preview</strong> of your store on the right and a <strong>settings panel</strong> on the left.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Editing Sections & Blocks</h3>
+          <p>In the Theme Editor, the left panel shows all the <strong>sections</strong> on the current page. Click any section to expand it and see its settings and blocks.</p>
+          <ul>
+            <li><strong>To reorder sections</strong> -- Drag the grip handle (six dots) on the left of any section name to move it up or down.</li>
+            <li><strong>To add a section</strong> -- Click "Add section" at the bottom of the section list. Choose from available section types.</li>
+            <li><strong>To remove a section</strong> -- Click the section, then click "Remove section" at the bottom of its settings.</li>
+            <li><strong>To edit a block</strong> -- Click the section to expand it, then click the individual block you want to edit.</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Preview Before Publishing</strong>
+              All changes in the Theme Editor are saved automatically but only visible to you until you click <strong>Save</strong>. Use the device preview icons at the top to see how your changes look on desktop, tablet, and mobile.
+            </div>
+          </div>
+
+          <h3>Theme Settings (Global)</h3>
+          <p>Click the <strong>gear icon</strong> or "Theme settings" at the bottom of the left panel to access global settings that affect your entire store:</p>
+          <ul>
+            <li><strong>Colors</strong> -- Your brand colors (Honey Gold, Farm Sage, Terracotta, Warm Cream) are pre-configured. Adjust them here if needed.</li>
+            <li><strong>Typography</strong> -- Font families and sizes for headings, body text, and accent text.</li>
+            <li><strong>Layout</strong> -- Page width, spacing, and overall layout preferences.</li>
+            <li><strong>Cart</strong> -- Choose between a drawer cart (slides in from the side) or a full-page cart experience.</li>
+            <li><strong>Social media</strong> -- Add your social media profile URLs to show icons in the footer.</li>
+            <li><strong>Favicon</strong> -- Upload a small icon that appears in browser tabs (your honeycomb icon works great).</li>
+          </ul>
+
+          <h3>Editing the Header & Navigation</h3>
+          <p>To change your store's main menu:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Navigation</span> in the admin (not the Theme Editor).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click on <strong>Main menu</strong> to edit the header navigation links.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Add, remove, or reorder menu items. Each item can link to a page, collection, product, URL, or blog.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                To create <strong>dropdown menus</strong>, drag a menu item slightly to the right to nest it under the item above.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Save</strong> when finished.
+              </div>
+            </li>
+          </ol>
+          <p>To edit the <strong>footer links</strong>, follow the same steps but edit the <strong>Footer menu</strong> instead.</p>
+
+          <h3>Updating the Hero Banner</h3>
+          <p>The hero banner is the large, prominent section at the top of your homepage.</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Open the Theme Editor and navigate to the <strong>Home page</strong> using the page dropdown at the top.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click the <strong>Hero Banner</strong> section in the left panel.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Edit the <strong>heading</strong>, <strong>subheading</strong>, and <strong>button text/link</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                To change the <strong>statistics</strong> (e.g., "50+ Products"), click the individual stat blocks within the hero section and update the numbers and labels.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Modifying the About Section</h3>
+          <p>The About section on your homepage showcases your farm's values and story.</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                In the Theme Editor on the Home page, click the <strong>About</strong> section.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Edit the <strong>heading</strong>, <strong>description text</strong>, and <strong>call-to-action button</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click individual <strong>value blocks</strong> (e.g., "Farm Fresh", "Handcrafted") to change their icons, titles, and descriptions.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Changing the Newsletter CTA</h3>
+          <p>The newsletter signup section encourages visitors to join your mailing list.</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                In the Theme Editor, click the <strong>Newsletter</strong> section.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Update the <strong>heading</strong> (e.g., "Join the Hive"), <strong>description</strong>, and <strong>button text</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                The form automatically creates a customer with the <code>newsletter</code> tag when someone subscribes.
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 5: Orders & Fulfillment           -->
+      <!-- ========================================= -->
+      <section class="section" id="orders">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">5</span>
+          <h2 class="section-title">Orders & Fulfillment</h2>
+        </div>
+        <div class="content">
+
+          <h3>Viewing & Processing New Orders</h3>
+          <p>When a customer places an order, you will receive an email notification. You can also check orders at any time:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Orders</span> in the admin sidebar. New orders are highlighted and tagged as <strong>Unfulfilled</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click on an order to see full details: customer info, items ordered, shipping address, and payment status.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Review the order for accuracy. Check the items, quantities, and shipping address.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Marking Orders as Fulfilled</h3>
+          <p>Once you have packed and shipped (or prepared for pickup) the order:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Open the order and click <strong>Fulfill items</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                If shipping, enter the <strong>tracking number</strong> and select the <strong>shipping carrier</strong>. This info is automatically emailed to the customer.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Fulfill items</strong> to confirm. The order status changes to "Fulfilled."
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Local Pickup</strong>
+              For in-person farm pickups, you can fulfill the order without a tracking number. Just mark it as fulfilled and the customer will receive a confirmation email.
+            </div>
+          </div>
+
+          <h3>Printing Packing Slips</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Open the order you want to print a slip for.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click the <strong>More actions</strong> dropdown (three dots or "..." menu).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Select <strong>Print packing slip</strong>. A printer-friendly page opens with order details.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Handling Refunds & Returns</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Open the order and click <strong>Refund</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enter the <strong>quantity</strong> to refund for each item, or refund a custom amount.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Optionally check <strong>Restock items</strong> to add the inventory back.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Add a <strong>reason</strong> for the refund (for your records), then click <strong>Refund</strong>.
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">!</span>
+            <div class="callout-content">
+              <strong>Refund Processing</strong>
+              Refunds typically take 5-10 business days to appear on the customer's statement. Shopify processes the refund immediately, but banks may take additional time.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 6: Email & Customers              -->
+      <!-- ========================================= -->
+      <section class="section" id="email">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">6</span>
+          <h2 class="section-title">Email & Customers</h2>
+        </div>
+        <div class="content">
+
+          <h3>Viewing Newsletter Subscribers</h3>
+          <p>When customers sign up through your newsletter form, they are added to your Customers list with a special tag:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Customers</span> in the admin sidebar.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Use the <strong>filter</strong> button and select <strong>Tagged with</strong> &gt; <code>newsletter</code> to see only newsletter subscribers.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                You can also search for specific subscribers by name or email.
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">i</span>
+            <div class="callout-content">
+              <strong>Subscriber vs. Customer</strong>
+              Not all newsletter subscribers are customers (they may not have purchased anything yet). The <code>newsletter</code> tag helps you distinguish between subscribers and buyers.
+            </div>
+          </div>
+
+          <h3>Email Marketing with Shopify Email</h3>
+          <p>Shopify includes a built-in email marketing tool. You get 10,000 free emails per month:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Marketing <span class="nav-arrow">&rsaquo;</span> Campaigns</span> and click <strong>Create campaign</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Select <strong>Shopify Email</strong> as the campaign type.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Choose a <strong>template</strong> and customize it with your content, images, and branding. Your store products can be automatically pulled in.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Select your <strong>recipient segment</strong> (all subscribers, specific tags, or custom segments).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                <strong>Preview</strong> the email, then <strong>Send</strong> or <strong>Schedule</strong> for a later date and time.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Customer Account Management</h3>
+          <p>Each customer who places an order or subscribes to your newsletter gets a customer profile. Here you can:</p>
+          <ul>
+            <li>View their <strong>order history</strong> and total spent</li>
+            <li>Add <strong>notes</strong> about the customer (internal, not visible to them)</li>
+            <li>Manage their <strong>tags</strong> for segmentation</li>
+            <li>See their <strong>contact information</strong> and addresses</li>
+            <li>View their <strong>timeline</strong> showing all interactions</li>
+          </ul>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 7: Pages & Blog                   -->
+      <!-- ========================================= -->
+      <section class="section" id="pages">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">7</span>
+          <h2 class="section-title">Pages & Blog</h2>
+        </div>
+        <div class="content">
+
+          <h3>Creating Content Pages</h3>
+          <p>Your store needs several key pages beyond the product pages. Common ones include About, Contact, FAQ, and any policy pages.</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Pages</span> and click <strong>Add page</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enter a <strong>Title</strong> and write your <strong>Content</strong> using the rich text editor.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                In the <strong>Template</strong> dropdown on the right side, choose the appropriate template for this page (see below).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Set the <strong>Visibility</strong> to "Visible" and click <strong>Save</strong>.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Using Custom Page Templates</h3>
+          <p>Your TCF theme includes specially designed templates for key pages:</p>
+          <ul>
+            <li><strong>page.about</strong> -- A rich About page template with space for your farm's story, team photos, and mission statement. Select this template for your About page.</li>
+            <li><strong>page.contact</strong> -- A Contact page template with a built-in contact form, map placeholder, farm hours, and address display. Select this for your Contact page.</li>
+            <li><strong>Default page</strong> -- A clean, versatile template for any other content page (FAQ, policies, etc.).</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Template Customization</strong>
+              After assigning a template, open the <strong>Theme Editor</strong> and navigate to that page using the page dropdown. You can then customize the sections and blocks specific to that page template, adding images, changing layout, and editing text.
+            </div>
+          </div>
+
+          <h3>Writing Blog Posts</h3>
+          <p>A blog is a great way to share farm updates, recipes, seasonal tips, and behind-the-scenes stories:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Blog posts</span> and click <strong>Add blog post</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Write your post with a compelling <strong>title</strong>, engaging <strong>content</strong>, and a <strong>featured image</strong>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Add an <strong>excerpt</strong> -- a short summary that appears on the blog listing page.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Assign the post to a <strong>blog</strong> (e.g., "News", "Recipes", "Farm Life"). You can create new blogs from this same screen.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Set the <strong>author</strong>, <strong>publish date</strong>, and <strong>visibility</strong>, then click <strong>Save</strong>.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Managing Blog Comments</h3>
+          <p>You can control how comments work on your blog:</p>
+          <ul>
+            <li>Go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Blog posts <span class="nav-arrow">&rsaquo;</span> Manage blogs</span>.</li>
+            <li>Click on your blog name and find the <strong>Comments</strong> setting.</li>
+            <li>Options: <strong>Disabled</strong> (no comments), <strong>Pending</strong> (comments require your approval), or <strong>Automatic</strong> (comments post immediately).</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Recommended</strong>
+              Start with comments set to <strong>Pending</strong> so you can review and approve them before they appear publicly. This prevents spam while still allowing community engagement.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 8: Settings & Payments            -->
+      <!-- ========================================= -->
+      <section class="section" id="settings">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">8</span>
+          <h2 class="section-title">Settings & Payments</h2>
+        </div>
+        <div class="content">
+
+          <h3>Setting Up Shopify Payments</h3>
+          <p>Shopify Payments is the simplest way to accept credit cards. It is built in and requires no third-party payment processor:</p>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Settings <span class="nav-arrow">&rsaquo;</span> Payments</span>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Activate Shopify Payments</strong> if not already set up.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Enter your <strong>business details</strong>: legal name, EIN/tax ID, business address, and banking information for payouts.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Configure which <strong>payment methods</strong> to accept (Visa, Mastercard, AMEX, Apple Pay, Google Pay, Shop Pay).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Set your <strong>payout schedule</strong> (daily, weekly, or monthly).
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">i</span>
+            <div class="callout-content">
+              <strong>Transaction Fees</strong>
+              Using Shopify Payments eliminates the extra 2% transaction fee that Shopify charges on third-party payment providers. Standard credit card processing rates still apply (typically 2.4% + 30 cents per transaction on the Basic plan).
+            </div>
+          </div>
+
+          <h3>Configuring Shipping</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Settings <span class="nav-arrow">&rsaquo;</span> Shipping and delivery</span>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Set up <strong>shipping zones</strong> (e.g., "Local" for Travis County, "Texas" for statewide, "Domestic" for all US).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Add <strong>shipping rates</strong> for each zone. Options include flat rate, weight-based, price-based, or free shipping over a certain amount.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Consider adding a <strong>Local pickup</strong> option for customers who want to collect their orders at the farm.
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">&#10003;</span>
+            <div class="callout-content">
+              <strong>Free Shipping Strategy</strong>
+              Offering free shipping above a certain order value (e.g., $50) is a proven way to increase average order size. Set this up as a shipping rate with a minimum order price condition.
+            </div>
+          </div>
+
+          <h3>Setting Up Taxes</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Settings <span class="nav-arrow">&rsaquo;</span> Taxes and duties</span>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Shopify automatically calculates US tax rates based on your store location and the customer's shipping address.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Review the rates for <strong>Texas</strong> and ensure they are correct. Some farm products may be tax-exempt -- consult your accountant.
+              </div>
+            </li>
+          </ol>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">!</span>
+            <div class="callout-content">
+              <strong>Tax Exemptions</strong>
+              Certain farm and food products may be exempt from sales tax in Texas. Consult your accountant or the Texas Comptroller's office to determine which of your products qualify for exemptions. You can override tax settings on individual products.
+            </div>
+          </div>
+
+          <h3>Connecting a Custom Domain</h3>
+          <ol class="steps">
+            <li>
+              <div class="step-content">
+                Go to <span class="nav-path">Settings <span class="nav-arrow">&rsaquo;</span> Domains</span>.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Click <strong>Connect existing domain</strong> if you already own a domain name, or <strong>Buy new domain</strong> to purchase one through Shopify.
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Follow the on-screen instructions to update your domain's <strong>DNS settings</strong> (typically pointing the A record and CNAME to Shopify's servers).
+              </div>
+            </li>
+            <li>
+              <div class="step-content">
+                Shopify automatically provisions an <strong>SSL certificate</strong> for your domain (the padlock icon), which can take up to 48 hours to activate.
+              </div>
+            </li>
+          </ol>
+
+          <h3>Store Policies</h3>
+          <p>Shopify can auto-generate policy templates for you. Go to <span class="nav-path">Settings <span class="nav-arrow">&rsaquo;</span> Policies</span> and you will find fields for:</p>
+          <ul>
+            <li><strong>Refund policy</strong> -- Your return and refund terms</li>
+            <li><strong>Privacy policy</strong> -- How you collect and use customer data</li>
+            <li><strong>Terms of service</strong> -- Legal terms for using your store</li>
+            <li><strong>Shipping policy</strong> -- Delivery timeframes, methods, and costs</li>
+            <li><strong>Contact information</strong> -- Required legal contact details</li>
+          </ul>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">!</span>
+            <div class="callout-content">
+              <strong>Legal Review</strong>
+              While Shopify's auto-generated policies are a great starting point, have them reviewed by a legal professional to ensure they accurately reflect your business practices and comply with local regulations.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================= -->
+      <!-- SECTION 9: FAQ & Troubleshooting          -->
+      <!-- ========================================= -->
+      <section class="section" id="faq">
+        <div class="honeycomb-divider">
+          <div class="hex hex-1"></div>
+          <div class="hex hex-2"></div>
+          <div class="hex hex-3"></div>
+          <div class="hex hex-4"></div>
+          <div class="hex hex-5"></div>
+        </div>
+        <div class="section-header">
+          <span class="section-number">9</span>
+          <h2 class="section-title">FAQ & Troubleshooting</h2>
+        </div>
+        <div class="content">
+          <p>Quick answers to common questions about managing your TCF Shopify store.</p>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I change a product from "Coming Soon" to available for purchase?
+            </div>
+            <div class="faq-answer">
+              Edit the product and remove the <code>coming-soon</code> tag from the Tags field. Save the product, and the "Add to Cart" button will appear immediately in place of the "Coming Soon" notice.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I add a sale badge to a product?
+            </div>
+            <div class="faq-answer">
+              Edit the product and set a <strong>Compare at price</strong> that is higher than the regular <strong>Price</strong>. For example, if the product sells for $18, set the Compare at price to $24. The theme will automatically display a "Sale" badge and show the original price crossed out.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I change the cart from a drawer to a full page?
+            </div>
+            <div class="faq-answer">
+              Open the Theme Editor, then go to <span class="nav-path">Theme settings <span class="nav-arrow">&rsaquo;</span> Cart</span>. Change the <strong>Cart type</strong> setting from "Drawer" to "Page." Save your changes.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I change the homepage hero text?
+            </div>
+            <div class="faq-answer">
+              Open the Theme Editor, make sure you are on the <strong>Home page</strong> (use the page dropdown at the top), then click the <strong>Hero Banner</strong> section in the left panel. You can edit the heading, subheading, button text, and statistics from there.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              Products are not showing up on the homepage. What do I do?
+            </div>
+            <div class="faq-answer">
+              The homepage Featured Collection section displays products from a specific <strong>collection</strong>. Make sure:
+              <br><br>
+              1. Your products are <strong>Active</strong> (not Draft).<br>
+              2. Your products are added to the <strong>collection</strong> that the Featured Collection section is configured to display.<br>
+              3. In the Theme Editor, click the Featured Collection section and verify the correct collection is selected.<br>
+              4. Check that the collection itself is not empty or set to unavailable.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              Newsletter signups are not working. Where are they going?
+            </div>
+            <div class="faq-answer">
+              Newsletter signups create <strong>customer records</strong> with the <code>newsletter</code> tag. They do not go to a separate email list. Go to <span class="nav-path">Customers</span> in your admin and filter by the tag <code>newsletter</code> to see all subscribers. If you are using Shopify Email for marketing, these subscribers are automatically available as a recipient segment.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I rearrange the order of products on a page?
+            </div>
+            <div class="faq-answer">
+              There are two ways:<br><br>
+              <strong>1. In the Admin:</strong> Go to <span class="nav-path">Products <span class="nav-arrow">&rsaquo;</span> Collections</span>, open the collection, and change the <strong>Sort</strong> option to "Manually." Then drag products into your preferred order.<br><br>
+              <strong>2. In the Theme Editor:</strong> Click the collection/product grid section and change the <strong>Sort by</strong> setting to your preference (Best selling, Price low-high, Alphabetical, Date added, or Manual).
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              How do I back up my theme before making big changes?
+            </div>
+            <div class="faq-answer">
+              Go to <span class="nav-path">Online Store <span class="nav-arrow">&rsaquo;</span> Themes</span>. Click the <strong>three dots (...)</strong> menu next to your active theme and select <strong>Duplicate</strong>. This creates an exact copy. If something goes wrong, you can publish the duplicate to restore everything.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span class="q-mark">Q</span>
+              I need help with something not covered here. Who do I contact?
+            </div>
+            <div class="faq-answer">
+              <strong>Shopify Support:</strong> Available 24/7 via live chat and email at <strong>help.shopify.com</strong>. They can help with account, billing, and general platform questions.<br><br>
+              <strong>Theme-specific questions:</strong> Contact your developer for issues related to the custom TCF theme, custom features, or design modifications that go beyond what the Theme Editor can handle.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Final divider -->
+      <div class="honeycomb-divider" style="margin-top: 48px;">
+        <div class="hex hex-1"></div>
+        <div class="hex hex-2"></div>
+        <div class="hex hex-3"></div>
+        <div class="hex hex-4"></div>
+        <div class="hex hex-5"></div>
+        <div class="hex hex-4"></div>
+        <div class="hex hex-3"></div>
+        <div class="hex hex-2"></div>
+        <div class="hex hex-1"></div>
+      </div>
+
+      <footer style="text-align: center; padding: 24px 0 16px; color: var(--text-muted); font-size: 13px;">
+        <p style="font-family: var(--font-display); font-size: 14px; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 8px;">Travis County Farm</p>
+        <p style="font-family: var(--font-accent); font-style: italic; margin-bottom: 16px;">Farmhouse meets modern apothecary</p>
+        <p>Shopify Store Setup Playbook &middot; Version 1.0</p>
+        <p style="margin-top: 4px;">Keep this guide handy for reference as you grow your online store.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // ===== Mobile Sidebar Toggle =====
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
+    // ===== Active TOC Link Tracking =====
+    (function() {
+      const sections = document.querySelectorAll('.section');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      function updateActiveTocLink() {
+        let currentSection = '';
+        const scrollPos = window.scrollY + 80;
+
+        sections.forEach(function(section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+
+        // If scrolled near bottom, activate last section
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+          currentSection = sections[sections.length - 1].getAttribute('id');
+        }
+
+        tocLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentSection) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveTocLink, { passive: true });
+      updateActiveTocLink();
+
+      // Close mobile sidebar when clicking a TOC link
+      tocLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

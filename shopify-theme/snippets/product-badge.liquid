@@ -1,0 +1,39 @@
+{%- comment -%}
+  Renders a product badge based on tags.
+  Usage: {% render 'product-badge', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  if settings.show_product_badges == false
+    break
+  endif
+
+  assign badge_text = ''
+  assign badge_class = ''
+
+  if product.compare_at_price > product.price
+    assign badge_text = 'products.product.badges.sale' | t
+    assign badge_class = 'sale'
+  endif
+
+  for tag in product.tags
+    assign tag_lower = tag | downcase
+    if tag_lower == 'flagship'
+      assign badge_text = 'products.product.badges.flagship' | t
+      assign badge_class = 'flagship'
+      break
+    elsif tag_lower == 'trending'
+      assign badge_text = 'products.product.badges.trending' | t
+      assign badge_class = 'trending'
+      break
+    elsif tag_lower == 'new'
+      assign badge_text = 'products.product.badges.new' | t
+      assign badge_class = 'new'
+      break
+    endif
+  endfor
+-%}
+
+{%- if badge_text != blank -%}
+  <span class="product-badge {{ badge_class }}">{{ badge_text }}</span>
+{%- endif -%}

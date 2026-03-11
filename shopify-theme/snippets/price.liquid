@@ -1,0 +1,25 @@
+{%- comment -%}
+  Price display with compare-at support.
+  Usage: {% render 'price', product: product %}
+         {% render 'price', variant: variant %}
+{%- endcomment -%}
+
+{%- liquid
+  if variant
+    assign target = variant
+    assign compare_price = variant.compare_at_price
+    assign current_price = variant.price
+  elsif product
+    assign target = product
+    assign compare_price = product.compare_at_price
+    assign current_price = product.price
+  endif
+-%}
+
+<div class="price{% if compare_price > current_price %} price--on-sale{% endif %}">
+  {%- if compare_price > current_price -%}
+    <span class="price__compare visually-hidden">{{ 'products.product.price.regular' | t }}</span>
+    <s class="price__compare-value">{{ compare_price | money }}</s>
+  {%- endif -%}
+  <span class="price__current">{{ current_price | money }}</span>
+</div>

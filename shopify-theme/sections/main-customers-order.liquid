@@ -1,0 +1,169 @@
+{{ 'component-customer.css' | asset_url | stylesheet_tag }}
+
+<section class="customer-section">
+  <div class="customer-section--wide">
+    <div class="customer-order-header">
+      <div>
+        <h1 class="customer-title customer-title--left">
+          {{ 'customer.order.title' | t: name: order.name }}
+        </h1>
+        <p class="customer-order-meta">
+          {{ 'customer.order.date' | t }}: {{ order.created_at | date: format: 'abbreviated_date' }}
+        </p>
+      </div>
+
+      <div class="customer-order-statuses">
+        <span class="customer-status customer-status--{{ order.financial_status }}">
+          {{ order.financial_status_label }}
+        </span>
+        <span class="customer-status customer-status--{{ order.fulfillment_status }}">
+          {{ order.fulfillment_status_label }}
+        </span>
+      </div>
+    </div>
+
+    {%- comment -%} Line items table {%- endcomment -%}
+    <table class="customer-table" role="table" aria-label="{{ 'customer.order.title' | t: name: order.name }}">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'customer.order.product' | t }}</th>
+          <th scope="col">{{ 'customer.order.sku' | t }}</th>
+          <th scope="col">{{ 'customer.order.price' | t }}</th>
+          <th scope="col">{{ 'customer.order.quantity' | t }}</th>
+          <th scope="col">{{ 'customer.order.total' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for line_item in order.line_items -%}
+          <tr>
+            <td data-label="{{ 'customer.order.product' | t }}">
+              <div class="customer-line-item__product">
+                {%- if line_item.image -%}
+                  <img
+                    src="{{ line_item.image | image_url: width: 120 }}"
+                    alt="{{ line_item.image.alt | escape }}"
+                    class="customer-line-item__image"
+                    width="60"
+                    height="60"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+                <div>
+                  <span class="customer-line-item__title">
+                    {%- if line_item.url != blank -%}
+                      <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+                    {%- else -%}
+                      {{ line_item.title }}
+                    {%- endif -%}
+                  </span>
+                  {%- if line_item.variant.title != 'Default Title' -%}
+                    <span class="customer-line-item__variant">{{ line_item.variant.title }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </td>
+            <td data-label="{{ 'customer.order.sku' | t }}">
+              {{ line_item.sku | default: '-' }}
+            </td>
+            <td data-label="{{ 'customer.order.price' | t }}">
+              {{ line_item.original_price | money }}
+            </td>
+            <td data-label="{{ 'customer.order.quantity' | t }}">
+              {{ line_item.quantity }}
+            </td>
+            <td data-label="{{ 'customer.order.total' | t }}">
+              {{ line_item.final_line_price | money }}
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    {%- comment -%} Order totals {%- endcomment -%}
+    <div class="customer-order-totals">
+      <div class="customer-order-totals__row">
+        <span>{{ 'customer.order.subtotal' | t }}</span>
+        <span>{{ order.line_items_subtotal_price | money }}</span>
+      </div>
+
+      {%- for shipping_method in order.shipping_methods -%}
+        <div class="customer-order-totals__row">
+          <span>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</span>
+          <span>{{ shipping_method.price | money }}</span>
+        </div>
+      {%- endfor -%}
+
+      {%- for tax_line in order.tax_lines -%}
+        <div class="customer-order-totals__row">
+          <span>{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</span>
+          <span>{{ tax_line.price | money }}</span>
+        </div>
+      {%- endfor -%}
+
+      {%- if order.total_discounts > 0 -%}
+        <div class="customer-order-totals__row customer-order-totals__row--discount">
+          <span>{{ 'customer.order.discount' | t }}</span>
+          <span>-{{ order.total_discounts | money }}</span>
+        </div>
+      {%- endif -%}
+
+      <div class="customer-order-totals__row customer-order-totals__row--total">
+        <span>{{ 'customer.order.total' | t }}</span>
+        <span>{{ order.total_price | money }}</span>
+      </div>
+    </div>
+
+    {%- comment -%} Shipping and billing addresses {%- endcomment -%}
+    <div class="customer-order-addresses">
+      {%- if order.shipping_address -%}
+        <div class="customer-order-address">
+          <h3>{{ 'customer.order.shipping' | t }}</h3>
+          <p>
+            {{ order.shipping_address.name }}<br>
+            {%- if order.shipping_address.company != blank -%}
+              {{ order.shipping_address.company }}<br>
+            {%- endif -%}
+            {{ order.shipping_address.street }}<br>
+            {{ order.shipping_address.city }}, {{ order.shipping_address.province_code }} {{ order.shipping_address.zip }}<br>
+            {{ order.shipping_address.country }}
+            {%- if order.shipping_address.phone != blank -%}
+              <br>{{ order.shipping_address.phone }}
+            {%- endif -%}
+          </p>
+        </div>
+      {%- endif -%}
+
+      {%- if order.billing_address -%}
+        <div class="customer-order-address">
+          <h3>Billing Address</h3>
+          <p>
+            {{ order.billing_address.name }}<br>
+            {%- if order.billing_address.company != blank -%}
+              {{ order.billing_address.company }}<br>
+            {%- endif -%}
+            {{ order.billing_address.street }}<br>
+            {{ order.billing_address.city }}, {{ order.billing_address.province_code }} {{ order.billing_address.zip }}<br>
+            {{ order.billing_address.country }}
+            {%- if order.billing_address.phone != blank -%}
+              <br>{{ order.billing_address.phone }}
+            {%- endif -%}
+          </p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div style="margin-top: var(--spacing-2xl);">
+      <a href="{{ routes.account_url }}" class="btn btn-secondary">
+        &larr; {{ 'customer.account.title' | t }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Order",
+  "tag": "section",
+  "class": "section-customer-order"
+}
+{% endschema %}

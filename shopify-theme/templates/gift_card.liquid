@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ 'gift_cards.title' | t }} - {{ shop.name }}</title>
+
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+  {{ settings.font_accent | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_face: font_display: 'swap' }}
+
+  <style>{% render 'css-variables' %}</style>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'component-customer.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+</head>
+<body>
+  <div class="gift-card-page">
+    <a href="{{ shop.url }}" class="gift-card-page__shop-name" style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--font-heading-weight); color: var(--color-text); margin-bottom: var(--spacing-2xl); text-decoration: none;">
+      {{ shop.name }}
+    </a>
+
+    <div class="gift-card">
+      <div class="gift-card__image-wrapper">
+        {%- if gift_card.image -%}
+          <img
+            src="{{ gift_card.image | image_url: width: 800 }}"
+            alt="{{ 'gift_cards.title' | t }}"
+            class="gift-card__image"
+            width="400"
+            height="auto"
+            loading="eager"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'gift-card/card.jpg' | shopify_asset_url }}"
+            alt="{{ 'gift_cards.title' | t }}"
+            class="gift-card__image"
+            width="400"
+            height="auto"
+            loading="eager"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if gift_card.enabled -%}
+        <p class="gift-card__balance">
+          {{ gift_card.balance | money }}
+        </p>
+
+        {%- if gift_card.balance != gift_card.initial_value -%}
+          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: calc(-1 * var(--spacing-sm));">
+            Initial value: {{ gift_card.initial_value | money }}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="gift-card__code-wrapper">
+        <div class="gift-card__code" id="gift-card-code">
+          {{ gift_card.code | format_code }}
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm gift-card__copy-btn"
+          id="copy-gift-card-code"
+          onclick="copyGiftCardCode()"
+        >
+          {{ 'gift_cards.copy' | t }}
+        </button>
+
+        <p class="gift-card__copy-success" id="copy-success" aria-live="polite">
+          Copied!
+        </p>
+      </div>
+
+      {%- if gift_card.expired -%}
+        <p class="gift-card__expiry gift-card__expiry--expired">
+          {{ 'gift_cards.expired' | t }}
+        </p>
+      {%- elsif gift_card.expires_on -%}
+        <p class="gift-card__expiry">
+          {{ 'gift_cards.expires' | t: date: gift_card.expires_on | date: "%B %e, %Y" }}
+        </p>
+      {%- endif -%}
+
+      {%- if gift_card.pass_url -%}
+        <a href="{{ gift_card.pass_url }}" class="btn btn-secondary btn-sm" style="margin-top: var(--spacing-md);">
+          Add to Apple Wallet
+        </a>
+      {%- endif -%}
+
+      <div class="gift-card__shop-link">
+        <a href="{{ shop.url }}" class="btn btn-primary" target="_blank" rel="noopener">
+          {{ 'gift_cards.shop_link' | t }}
+        </a>
+      </div>
+
+      {%- if gift_card.qr_identifier -%}
+        <div style="margin-top: var(--spacing-xl); display: flex; justify-content: center;">
+          <img
+            src="{{ gift_card | qr_code }}"
+            alt="QR code for gift card {{ gift_card.code }}"
+            width="120"
+            height="120"
+            style="border-radius: var(--radius-md);"
+          >
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script>
+    function copyGiftCardCode() {
+      var codeEl = document.getElementById('gift-card-code');
+      var successEl = document.getElementById('copy-success');
+      var code = codeEl.innerText.replace(/\s/g, '');
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(function() {
+          showCopySuccess(successEl);
+        }).catch(function() {
+          fallbackCopy(codeEl, successEl);
+        });
+      } else {
+        fallbackCopy(codeEl, successEl);
+      }
+    }
+
+    function fallbackCopy(el, successEl) {
+      var range = document.createRange();
+      range.selectNodeContents(el);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        showCopySuccess(successEl);
+      } catch (e) {
+        // Silent fail
+      }
+      selection.removeAllRanges();
+    }
+
+    function showCopySuccess(el) {
+      el.classList.add('is-visible');
+      setTimeout(function() {
+        el.classList.remove('is-visible');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

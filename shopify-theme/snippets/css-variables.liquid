@@ -1,0 +1,140 @@
+{%- comment -%}Converts theme settings into CSS custom properties.{%- endcomment -%}
+
+{%- liquid
+  assign primary = settings.color_primary
+  assign primary_light = settings.color_primary_light
+  assign primary_dark = settings.color_primary_dark
+  assign secondary = settings.color_secondary
+  assign secondary_light = settings.color_secondary_light
+  assign accent = settings.color_accent
+  assign bg = settings.color_bg
+  assign bg_alt = settings.color_bg_alt
+  assign bg_muted = settings.color_bg_muted
+  assign text_color = settings.color_text
+  assign text_secondary = settings.color_text_secondary
+  assign text_muted = settings.color_text_muted
+  assign border_color = settings.color_border
+  assign border_light = settings.color_border_light
+  assign success = settings.color_success
+  assign error = settings.color_error
+  assign warning = settings.color_warning
+  assign page_width = settings.page_width
+  assign spacing_sections = settings.spacing_sections
+  assign border_radius = settings.border_radius
+  assign body_scale = settings.font_body_scale | times: 0.01
+  assign heading_scale = settings.font_heading_scale | times: 0.01
+-%}
+
+:root {
+  /* Colors - Primary (Honey Gold) */
+  --color-primary: {{ primary }};
+  --color-primary-light: {{ primary_light }};
+  --color-primary-dark: {{ primary_dark }};
+  --color-primary-subtle: {{ primary | color_modify: 'alpha', 0.12 }};
+  --color-primary-rgb: {{ primary.red }}, {{ primary.green }}, {{ primary.blue }};
+
+  /* Colors - Secondary (Farm Sage) */
+  --color-secondary: {{ secondary }};
+  --color-secondary-light: {{ secondary_light }};
+  --color-secondary-dark: {{ secondary | color_darken: 15 }};
+
+  /* Colors - Accent (Terracotta) */
+  --color-accent: {{ accent }};
+  --color-accent-light: {{ accent | color_lighten: 15 }};
+  --color-accent-subtle: {{ accent | color_modify: 'alpha', 0.12 }};
+
+  /* Background */
+  --color-bg: {{ bg }};
+  --color-bg-rgb: {{ bg.red }}, {{ bg.green }}, {{ bg.blue }};
+  --color-bg-alt: {{ bg_alt }};
+  --color-bg-elevated: #ffffff;
+  --color-bg-muted: {{ bg_muted }};
+
+  /* Surface */
+  --color-surface: #ffffff;
+  --color-surface-hover: {{ bg }};
+  --color-surface-active: {{ bg_alt }};
+
+  /* Text */
+  --color-text: {{ text_color }};
+  --color-text-secondary: {{ text_secondary }};
+  --color-text-muted: {{ text_muted }};
+  --color-text-inverse: {{ bg }};
+
+  /* Borders */
+  --color-border: {{ border_color }};
+  --color-border-light: {{ border_light }};
+  --color-border-dark: {{ border_color | color_darken: 8 }};
+
+  /* Semantic */
+  --color-success: {{ success }};
+  --color-warning: {{ warning }};
+  --color-error: {{ error }};
+  --color-info: #5a7fa8;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, {{ primary }} 0%, {{ primary_light }} 100%);
+  --gradient-hero: linear-gradient(180deg, {{ primary | color_lighten: 40 }} 0%, {{ bg }} 100%);
+  --gradient-cta: linear-gradient(135deg, {{ primary }} 0%, {{ primary_dark }} 50%, {{ secondary }} 100%);
+  --gradient-card: linear-gradient(180deg, #ffffff 0%, {{ bg }} 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 4px 6px -1px rgba({{ primary.red }}, {{ primary.green }}, {{ primary.blue }}, 0.08),
+                 0 2px 4px -2px rgba({{ primary.red }}, {{ primary.green }}, {{ primary.blue }}, 0.08);
+  --shadow-elevated: 0 20px 25px -5px rgba({{ primary.red }}, {{ primary.green }}, {{ primary.blue }}, 0.1),
+                     0 8px 10px -6px rgba({{ primary.red }}, {{ primary.green }}, {{ primary.blue }}, 0.08);
+
+  /* Typography */
+  --font-display: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+  --font-serif: {{ settings.font_accent.family }}, {{ settings.font_accent.fallback_families }};
+  --font-sans: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+
+  --font-heading-weight: {{ settings.font_heading.weight }};
+  --font-accent-weight: {{ settings.font_accent.weight }};
+  --font-body-weight: {{ settings.font_body.weight }};
+
+  --font-body-style: {{ settings.font_body.style }};
+
+  --text-xs: calc(0.75rem * {{ body_scale }});
+  --text-sm: calc(0.875rem * {{ body_scale }});
+  --text-base: calc(1rem * {{ body_scale }});
+  --text-lg: calc(1.125rem * {{ body_scale }});
+  --text-xl: calc(1.25rem * {{ body_scale }});
+  --text-2xl: calc(1.5rem * {{ heading_scale }});
+  --text-3xl: calc(1.875rem * {{ heading_scale }});
+  --text-4xl: calc(2.25rem * {{ heading_scale }});
+  --text-5xl: calc(3rem * {{ heading_scale }});
+  --text-6xl: calc(3.75rem * {{ heading_scale }});
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: {{ spacing_sections }}px;
+
+  /* Borders and Radius */
+  --radius-sm: {{ border_radius | divided_by: 4 }}px;
+  --radius-md: {{ border_radius | divided_by: 2 }}px;
+  --radius-lg: {{ border_radius }}px;
+  --radius-xl: {{ border_radius | times: 1.33 | round }}px;
+  --radius-2xl: {{ border_radius | times: 2 }}px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --container-max: {{ page_width }}px;
+  --container-padding: 1.5rem;
+  --nav-height: 64px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+}

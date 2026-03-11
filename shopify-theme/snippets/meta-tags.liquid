@@ -1,0 +1,26 @@
+{%- comment -%}SEO meta tags. Rendered in theme.liquid <head>.{%- endcomment -%}
+
+{%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+{%- endif -%}
+
+{%- if page_title contains 'Page 2' or page_title contains 'Page 3' -%}
+  <meta name="robots" content="noindex, follow">
+{%- endif -%}
+
+{%- if canonical_url != blank -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+{%- endif -%}
+
+<meta name="theme-color" content="{{ settings.color_primary }}">
+<meta name="msapplication-TileColor" content="{{ settings.color_primary }}">
+
+{%- if template.name == 'index' -%}
+  <meta name="author" content="{{ shop.name }}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+{%- endif -%}
+
+{%- if request.host contains 'traviscountyfarm' -%}
+  <meta name="geo.region" content="US-TX">
+  <meta name="geo.placename" content="Travis County, Texas">
+{%- endif -%}

@@ -1,0 +1,67 @@
+{%- comment -%}
+  Reusable product card.
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign is_coming_soon = false
+
+  if settings.coming_soon_method == 'tag'
+    for tag in product.tags
+      if tag == 'coming-soon'
+        assign is_coming_soon = true
+        break
+      endif
+    endfor
+  elsif settings.coming_soon_method == 'metafield'
+    if product.metafields.custom.coming_soon == true
+      assign is_coming_soon = true
+    endif
+  endif
+-%}
+
+<div class="product-card">
+  {% render 'product-badge', product: product %}
+
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}">
+    <div class="product-image">
+      {%- if product.featured_image != blank -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 400 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          width="400"
+          height="{{ 400 | divided_by: product.featured_image.aspect_ratio | round }}"
+          loading="lazy"
+        >
+      {%- elsif settings.show_product_illustrations -%}
+        {% render 'product-illustration', product: product %}
+      {%- endif -%}
+    </div>
+
+    {%- if product.type != blank -%}
+      <span class="product-category">{{ product.type }}</span>
+    {%- endif -%}
+    <h3 class="product-title">{{ product.title }}</h3>
+  </a>
+
+  {%- if product.description != blank -%}
+    <p class="product-description">{{ product.description | strip_html | truncate: 120 }}</p>
+  {%- endif -%}
+
+  <div class="product-footer">
+    {% render 'price', product: product %}
+
+    {%- if is_coming_soon -%}
+      <span class="product-status">{{ 'products.product.coming_soon' | t }}</span>
+    {%- elsif product.available -%}
+      <form action="{{ routes.cart_add_url }}" method="post" class="product-card__form">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="btn btn-sm btn-primary product-card__add">
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+    {%- else -%}
+      <span class="product-status product-status--sold-out">{{ 'products.product.sold_out' | t }}</span>
+    {%- endif -%}
+  </div>
+</div>

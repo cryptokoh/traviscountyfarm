@@ -1,0 +1,157 @@
+{{ 'component-about.css' | asset_url | stylesheet_tag }}
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="section-subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section-title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'text' -%}
+              <p class="about-text" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+            {%- when 'value' -%}
+              <div class="value-item" {{ block.shopify_attributes }}>
+                <div class="value-icon">
+                  {%- case block.settings.icon -%}
+                    {%- when 'star' -%}
+                      {% render 'icon-star' %}
+                    {%- when 'shield' -%}
+                      {% render 'icon-shield' %}
+                    {%- when 'location' -%}
+                      {% render 'icon-location' %}
+                    {%- else -%}
+                      {% render 'icon-star' %}
+                  {%- endcase -%}
+                </div>
+                <div>
+                  {%- if block.settings.heading != blank -%}
+                    <h4>{{ block.settings.heading }}</h4>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p>{{ block.settings.text }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="about-visual">
+        {%- if section.settings.image != blank -%}
+          <img
+            class="about-illustration"
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="400"
+            height="{{ 400 | divided_by: section.settings.image.aspect_ratio | round }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <svg class="about-illustration" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="400" height="400" rx="24" fill="var(--color-bg-alt)"/>
+            <path d="M0,280 Q100,240 200,260 Q300,280 400,250 L400,400 L0,400Z" fill="var(--color-secondary)" opacity="0.15"/>
+            <path d="M0,300 Q150,270 250,290 Q350,310 400,280 L400,400 L0,400Z" fill="var(--color-secondary)" opacity="0.1"/>
+            <circle cx="320" cy="100" r="40" fill="var(--color-primary)" opacity="0.2"/>
+            <circle cx="320" cy="100" r="25" fill="var(--color-primary)" opacity="0.15"/>
+            <path d="M180,220 Q180,180 200,170 Q220,180 220,220Z" fill="var(--color-primary)" opacity="0.25" stroke="var(--color-primary)" stroke-width="1"/>
+            <path d="M184,200 L216,200" stroke="var(--color-primary)" stroke-width="1" opacity="0.3"/>
+            <path d="M182,210 L218,210" stroke="var(--color-primary)" stroke-width="1" opacity="0.3"/>
+            <rect x="192" y="220" width="16" height="8" rx="2" fill="var(--color-primary)" opacity="0.2"/>
+            <circle cx="80" cy="80" r="2" fill="var(--color-primary)" opacity="0.3"/>
+            <circle cx="150" cy="60" r="1.5" fill="var(--color-primary)" opacity="0.25"/>
+            <circle cx="250" cy="50" r="1.5" fill="var(--color-primary)" opacity="0.2"/>
+          </svg>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About / Story",
+  "class": "section-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Rooted in the Land"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Falls back to SVG farm illustration if empty."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text block",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Travis County Farm started with a single beehive and a belief that the best things come from working with the land, not against it."
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Value item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "star", "label": "Star" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "location", "label": "Location" }
+          ],
+          "default": "star"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Locally Sourced"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Everything starts on our land in Travis County"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About / Story",
+      "blocks": [
+        { "type": "text", "settings": { "text": "Travis County Farm started with a single beehive and a belief that the best things come from working with the land, not against it. What began as raw honey quickly grew into a full line of handcrafted goods - each one connected back to what we grow and harvest right here in Travis County, Texas." } },
+        { "type": "text", "settings": { "text": "Our honey feeds into our elderberry syrup. Our beeswax becomes candles and healing salves. Every product is part of a vertically integrated cycle that starts and ends on the farm." } },
+        { "type": "value", "settings": { "icon": "star", "heading": "Locally Sourced", "text": "Everything starts on our land in Travis County" } },
+        { "type": "value", "settings": { "icon": "shield", "heading": "Small Batch", "text": "Handcrafted in limited quantities for quality" } },
+        { "type": "value", "settings": { "icon": "location", "heading": "Chemical Free", "text": "No additives, no shortcuts, just nature" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

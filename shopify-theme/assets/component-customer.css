@@ -1,0 +1,737 @@
+/* ============================================
+   Travis County Farm - Customer Account Styles
+   Farmhouse meets modern apothecary
+   ============================================ */
+
+/* ============================================
+   Customer Section Container
+   ============================================ */
+
+.customer-section {
+  padding: var(--spacing-4xl) 0;
+}
+
+.customer-section--narrow {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.customer-section--wide {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* ============================================
+   Customer Page Title
+   ============================================ */
+
+.customer-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-heading-weight);
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.2;
+}
+
+.customer-title--left {
+  text-align: left;
+}
+
+.customer-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: calc(-1 * var(--spacing-lg));
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.6;
+}
+
+/* ============================================
+   Customer Form
+   ============================================ */
+
+.customer-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-card);
+}
+
+.customer-form .form-field:last-of-type {
+  margin-bottom: var(--spacing-xl);
+}
+
+.customer-form .btn {
+  margin-top: var(--spacing-sm);
+}
+
+.customer-form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.customer-form__footer {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.customer-form__footer p {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.customer-form__footer a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-subtle);
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--transition-fast);
+}
+
+.customer-form__footer a:hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Inline link (e.g., forgot password) */
+.customer-form__link {
+  display: inline-block;
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-subtle);
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--transition-fast);
+  margin-bottom: var(--spacing-lg);
+}
+
+.customer-form__link:hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Form-level errors */
+.customer-form__errors {
+  background: rgba(var(--color-error), 0.08);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--text-sm);
+  color: var(--color-error);
+}
+
+.customer-form__errors ul {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+  margin-top: var(--spacing-xs);
+}
+
+/* Form success message */
+.customer-form__success {
+  background: rgba(var(--color-success), 0.08);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--text-sm);
+  color: var(--color-success);
+}
+
+/* Guest checkout divider */
+.customer-form__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: var(--spacing-xl) 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.customer-form__divider::before,
+.customer-form__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-light);
+}
+
+/* ============================================
+   Customer Table
+   ============================================ */
+
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-xl);
+}
+
+.customer-table thead {
+  border-bottom: 2px solid var(--color-border);
+}
+
+.customer-table th {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: left;
+  padding: var(--spacing-md) var(--spacing-md);
+  white-space: nowrap;
+}
+
+.customer-table td {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-md) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: middle;
+}
+
+.customer-table tbody tr:hover {
+  background: var(--color-bg-alt);
+}
+
+.customer-table a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-subtle);
+  text-underline-offset: 2px;
+}
+
+.customer-table a:hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Responsive table: stack on mobile */
+@media (max-width: 768px) {
+  .customer-table thead {
+    display: none;
+  }
+
+  .customer-table,
+  .customer-table tbody,
+  .customer-table tr,
+  .customer-table td {
+    display: block;
+  }
+
+  .customer-table tr {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .customer-table td {
+    padding: var(--spacing-xs) 0;
+    border-bottom: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .customer-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: var(--spacing-md);
+  }
+}
+
+/* ============================================
+   Customer Card (Address Cards)
+   ============================================ */
+
+.customer-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base);
+}
+
+.customer-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.customer-card--default {
+  border-color: var(--color-primary);
+  border-width: 2px;
+}
+
+.customer-card__badge {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.customer-card__address {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-lg);
+}
+
+.customer-card__actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+/* Address card grid */
+.customer-addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+/* ============================================
+   Order Status Badges
+   ============================================ */
+
+.customer-status {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.customer-status--paid,
+.customer-status--fulfilled {
+  background: rgba(var(--color-success), 0.1);
+  color: var(--color-success);
+}
+
+.customer-status--pending,
+.customer-status--partial {
+  background: rgba(var(--color-warning), 0.1);
+  color: var(--color-warning);
+}
+
+.customer-status--unfulfilled,
+.customer-status--unpaid {
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ============================================
+   Order Details
+   ============================================ */
+
+.customer-order-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.customer-order-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.customer-order-statuses {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.customer-order-totals {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.customer-order-totals__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.customer-order-totals__row--total {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  border-top: 2px solid var(--color-border);
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+}
+
+.customer-order-totals__row--discount {
+  color: var(--color-success);
+}
+
+/* Shipping and billing addresses */
+.customer-order-addresses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.customer-order-address {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.customer-order-address h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--spacing-md);
+}
+
+.customer-order-address p {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* ============================================
+   Account Header
+   ============================================ */
+
+.customer-account-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.customer-account-header .customer-title {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.customer-account-nav {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   Address Form (Add/Edit)
+   ============================================ */
+
+.customer-address-form {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+  box-shadow: var(--shadow-card);
+}
+
+.customer-address-form__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-heading-weight);
+  margin-bottom: var(--spacing-xl);
+}
+
+.customer-address-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+  .customer-address-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.customer-address-form__actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.customer-address-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.customer-address-form__checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* Toggle for add/edit address forms */
+.customer-address-toggle {
+  cursor: pointer;
+}
+
+.customer-address-form-wrapper {
+  display: none;
+}
+
+.customer-address-form-wrapper.is-active {
+  display: block;
+}
+
+/* ============================================
+   Line Item in Order
+   ============================================ */
+
+.customer-line-item__product {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.customer-line-item__image {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 1px solid var(--color-border-light);
+}
+
+.customer-line-item__title {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.customer-line-item__variant {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================
+   Gift Card Styles
+   ============================================ */
+
+.gift-card-page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--container-padding);
+  text-align: center;
+}
+
+.gift-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-2xl);
+  max-width: 440px;
+  width: 100%;
+}
+
+.gift-card__image-wrapper {
+  margin-bottom: var(--spacing-xl);
+}
+
+.gift-card__image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+.gift-card__balance {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-heading-weight);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.gift-card__code-wrapper {
+  position: relative;
+  margin: var(--spacing-xl) 0;
+}
+
+.gift-card__code {
+  font-family: monospace;
+  font-size: var(--text-xl);
+  letter-spacing: 0.15em;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  word-break: break-all;
+  user-select: all;
+}
+
+.gift-card__copy-btn {
+  margin-top: var(--spacing-md);
+}
+
+.gift-card__copy-success {
+  font-size: var(--text-sm);
+  color: var(--color-success);
+  margin-top: var(--spacing-sm);
+  display: none;
+}
+
+.gift-card__copy-success.is-visible {
+  display: block;
+}
+
+.gift-card__expiry {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-lg);
+}
+
+.gift-card__expiry--expired {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.gift-card__shop-link {
+  margin-top: var(--spacing-xl);
+}
+
+/* ============================================
+   Password Page
+   ============================================ */
+
+.password-section {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--container-padding);
+  text-align: center;
+}
+
+.password-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-2xl);
+  max-width: 480px;
+  width: 100%;
+}
+
+.password-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-heading-weight);
+  margin-bottom: var(--spacing-md);
+}
+
+.password-card__subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.6;
+}
+
+.password-card__divider {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  margin: var(--spacing-2xl) 0;
+}
+
+.password-card__powered {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xl);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .customer-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .customer-title {
+    font-size: var(--text-3xl);
+  }
+
+  .customer-form {
+    padding: var(--spacing-xl);
+  }
+
+  .customer-account-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .customer-account-header .customer-title {
+    text-align: left;
+    width: 100%;
+  }
+
+  .customer-order-header {
+    flex-direction: column;
+  }
+
+  .customer-line-item__image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .gift-card {
+    padding: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .customer-form {
+    padding: var(--spacing-lg);
+  }
+
+  .customer-card {
+    padding: var(--spacing-lg);
+  }
+
+  .customer-address-form {
+    padding: var(--spacing-lg);
+  }
+
+  .customer-order-totals {
+    padding: var(--spacing-lg);
+  }
+
+  .customer-addresses-grid {
+    grid-template-columns: 1fr;
+  }
+}

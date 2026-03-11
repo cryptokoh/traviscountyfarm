@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "badge_text": "Rooted in Travis County, TX",
+        "heading": "From Our Land to Your Hands",
+        "subheading": "Small-batch artisan honey, beeswax goods, and herbal remedies crafted with care on our Texas farm. Every product tells a story of land, bees, and tradition.",
+        "button_label": "Explore Our Products",
+        "button_link": "#shopify-section-products"
+      },
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "number": "6", "label": "Products" } },
+        "stat-2": { "type": "stat", "settings": { "number": "100%", "label": "Natural" } },
+        "stat-3": { "type": "stat", "settings": { "number": "Made in", "label": "Texas" } }
+      },
+      "block_order": ["stat-1", "stat-2", "stat-3"]
+    },
+    "products": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "What We Make",
+        "title": "Our Products",
+        "description": "Every jar, candle, and tin starts with what we grow and harvest right here on the farm. Our honey and beeswax form the foundation of a product line rooted in self-sufficiency.",
+        "products_to_show": 6,
+        "show_view_all": false
+      }
+    },
+    "about": {
+      "type": "about-story",
+      "settings": {
+        "subtitle": "Our Story",
+        "heading": "Rooted in the Land"
+      },
+      "blocks": {
+        "text-1": { "type": "text", "settings": { "text": "Travis County Farm started with a single beehive and a belief that the best things come from working with the land, not against it. What began as raw honey quickly grew into a full line of handcrafted goods - each one connected back to what we grow and harvest right here in Travis County, Texas." } },
+        "text-2": { "type": "text", "settings": { "text": "Our honey feeds into our elderberry syrup. Our beeswax becomes candles and healing salves. Every product is part of a vertically integrated cycle that starts and ends on the farm." } },
+        "value-1": { "type": "value", "settings": { "icon": "star", "heading": "Locally Sourced", "text": "Everything starts on our land in Travis County" } },
+        "value-2": { "type": "value", "settings": { "icon": "shield", "heading": "Small Batch", "text": "Handcrafted in limited quantities for quality" } },
+        "value-3": { "type": "value", "settings": { "icon": "location", "heading": "Chemical Free", "text": "No additives, no shortcuts, just nature" } }
+      },
+      "block_order": ["text-1", "text-2", "value-1", "value-2", "value-3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the TCF Family",
+        "description": "Be the first to know when our products launch. Get farm updates, seasonal offerings, and exclusive early access."
+      }
+    }
+  },
+  "order": ["hero", "products", "about", "newsletter"]
+}

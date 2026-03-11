@@ -1,0 +1,39 @@
+/* ============================================
+   Rich Text Section
+   ============================================ */
+
+.rich-text-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--color-bg);
+}
+
+.rich-text-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rich-text-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-heading-weight);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xl);
+}
+
+.rich-text-content {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rich-text-heading {
+    font-size: var(--text-3xl);
+  }
+
+  .rich-text-content {
+    font-size: var(--text-base);
+  }
+}

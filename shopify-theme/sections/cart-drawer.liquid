@@ -1,0 +1,75 @@
+{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+
+<div id="cart-drawer" class="cart-drawer" aria-label="{{ 'cart.title' | t }}" role="dialog" aria-modal="true">
+  <div class="cart-drawer__overlay" data-cart-drawer-overlay></div>
+
+  <div class="cart-drawer__panel">
+    {%- comment -%} Header {%- endcomment -%}
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title" id="cart-drawer-title">
+        {{ 'cart.title' | t }}
+        <span class="cart-drawer__count" data-cart-drawer-count>
+          ({{ cart.item_count }})
+        </span>
+      </h2>
+      <button
+        type="button"
+        class="cart-drawer__close"
+        data-cart-drawer-close
+        aria-label="{{ 'general.close' | t }}"
+      >
+        {% render 'icon-close' %}
+      </button>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      {%- comment -%} Line items {%- endcomment -%}
+      <div class="cart-drawer__items" data-cart-drawer-items>
+        {%- for item in cart.items -%}
+          {% render 'cart-line-item', item: item %}
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-drawer__spinner" aria-hidden="true">
+        <span class="loading-spinner"></span>
+      </div>
+
+      {%- comment -%} Footer {%- endcomment -%}
+      <div class="cart-drawer__footer" data-cart-drawer-footer>
+        <div class="cart-drawer__subtotal">
+          <span class="cart-drawer__subtotal-label">{{ 'cart.subtotal' | t }}</span>
+          <span class="cart-drawer__subtotal-value" data-cart-drawer-subtotal>
+            {{ cart.total_price | money }}
+          </span>
+        </div>
+        <p class="cart-drawer__taxes-note">{{ 'cart.taxes_and_shipping' | t }}</p>
+        <a href="/checkout" class="btn btn-primary btn-lg cart-drawer__checkout">
+          {{ 'cart.checkout' | t }}
+        </a>
+      </div>
+    {%- else -%}
+      {%- comment -%} Empty state {%- endcomment -%}
+      <div class="cart-drawer__empty" data-cart-drawer-empty>
+        <div class="cart-drawer__empty-icon">
+          {% render 'icon-cart' %}
+        </div>
+        <p class="cart-drawer__empty-text">{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url | default: routes.root_url }}" class="cart-drawer__continue" data-cart-drawer-close>
+          {% render 'icon-arrow' %}
+          {{ 'cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "class": "cart-drawer-section",
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

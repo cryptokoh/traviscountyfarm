@@ -1,0 +1,217 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "cart": "Cart",
+    "search": "Search",
+    "account": "Account",
+    "close": "Close",
+    "menu": "Menu",
+    "share": "Share",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{ number }}"
+    },
+    "newsletter": {
+      "email_placeholder": "Enter your email",
+      "subscribe": "Join",
+      "success": "Thanks for subscribing!",
+      "note": "No spam, ever. Just honest farm updates."
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "unit_price_separator": "per",
+    "toggle_menu": "Toggle menu",
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "coming_soon": "Coming Soon",
+      "sold_out": "Sold Out",
+      "sale": "Sale",
+      "from_price": "From {{ price }}",
+      "quantity": "Quantity",
+      "description": "Description",
+      "view_product": "View product",
+      "on_sale": "Sale",
+      "price": {
+        "regular": "Regular price",
+        "sale": "Sale price",
+        "from": "From",
+        "unit_price": "Unit price"
+      },
+      "badges": {
+        "flagship": "Flagship",
+        "trending": "Trending",
+        "new": "New",
+        "sale": "Sale"
+      }
+    },
+    "recommendations": {
+      "title": "You May Also Like"
+    }
+  },
+  "collections": {
+    "title": "Collections",
+    "all": "All Products",
+    "sort_by": "Sort by",
+    "sort_options": {
+      "manual": "Featured",
+      "best-selling": "Best Selling",
+      "title-ascending": "A-Z",
+      "title-descending": "Z-A",
+      "price-ascending": "Price: Low to High",
+      "price-descending": "Price: High to Low",
+      "created-ascending": "Oldest",
+      "created-descending": "Newest"
+    },
+    "empty": "No products found in this collection."
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "taxes_and_shipping": "Taxes and shipping calculated at checkout",
+    "checkout": "Check Out",
+    "update": "Update",
+    "remove": "Remove",
+    "note": "Order note",
+    "note_placeholder": "Add a note to your order...",
+    "quantity": "Quantity",
+    "item_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read More",
+      "author_on_date": "By {{ author }} on {{ date }}",
+      "back_to_blog": "Back to {{ title }}"
+    },
+    "comments": {
+      "title": "Comments",
+      "leave_comment": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "post_comment": "Post Comment",
+      "moderated": "Comments are moderated and will appear shortly."
+    }
+  },
+  "customer": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign In",
+      "forgot_password": "Forgot your password?",
+      "create_account": "Create Account",
+      "guest_title": "Continue as guest",
+      "guest_continue": "Continue"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "create": "Create",
+      "already_have_account": "Already have an account?"
+    },
+    "account": {
+      "title": "My Account",
+      "orders": "Order History",
+      "no_orders": "You haven't placed any orders yet.",
+      "addresses": "Addresses",
+      "details": "Account Details",
+      "logout": "Log Out"
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "discount": "Discount"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "add_new": "Add New Address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "default": "Default",
+      "set_default": "Set as default",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "city": "City",
+      "province": "State/Province",
+      "zip": "ZIP/Postal Code",
+      "country": "Country",
+      "phone": "Phone",
+      "update": "Update Address",
+      "add": "Add Address",
+      "cancel": "Cancel"
+    },
+    "reset_password": {
+      "title": "Reset Password",
+      "subtext": "Enter your email and we'll send you a reset link.",
+      "email": "Email",
+      "submit": "Submit",
+      "success": "We've sent you an email with a link to reset your password."
+    },
+    "activate_account": {
+      "title": "Activate Account",
+      "subtext": "Create your password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm Password",
+      "submit": "Activate Account",
+      "cancel": "Decline Invitation"
+    }
+  },
+  "gift_cards": {
+    "title": "Gift Card",
+    "copy": "Copy code",
+    "expired": "Expired",
+    "expires": "Expires {{ date }}",
+    "shop_link": "Visit the store"
+  },
+  "password_page": {
+    "title": "Opening Soon",
+    "subtitle": "We're getting things ready. Enter your email to be notified when we launch.",
+    "password_label": "Enter store password",
+    "enter": "Enter",
+    "powered_by": "Powered by Shopify"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search our store...",
+    "no_results": "No results found for \"{{ terms }}\".",
+    "results_count": {
+      "one": "{{ count }} result",
+      "other": "{{ count }} results"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu"
+    },
+    "footer": {
+      "copyright": "&copy; {{ year }} {{ shop_name }}. All rights reserved."
+    }
+  }
+}

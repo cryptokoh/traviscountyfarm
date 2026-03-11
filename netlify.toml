@@ -33,3 +33,16 @@
   for = "/research.html"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
+
+# Block indexing on playbook pages
+[[headers]]
+  for = "/playbook/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
+    X-Frame-Options = "SAMEORIGIN"
+
+# Allow iframe for playbook guide within same origin
+[[headers]]
+  for = "/playbook/guide.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"

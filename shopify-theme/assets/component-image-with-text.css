@@ -1,0 +1,102 @@
+/* ============================================
+   Image with Text Section
+   ============================================ */
+
+.image-with-text-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--color-bg);
+}
+
+.image-with-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4xl);
+  align-items: center;
+}
+
+.image-with-text--reversed {
+  direction: rtl;
+}
+
+.image-with-text--reversed > * {
+  direction: ltr;
+}
+
+/* Media */
+.image-with-text__media {
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+}
+
+.image-with-text__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-slow);
+}
+
+.image-with-text__media:hover .image-with-text__image {
+  transform: scale(1.03);
+}
+
+.image-with-text__placeholder {
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-with-text__placeholder .placeholder-svg {
+  width: 60%;
+  height: auto;
+  fill: var(--color-text-muted);
+}
+
+/* Content */
+.image-with-text__heading {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-heading-weight);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg);
+}
+
+.image-with-text__text {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.image-with-text__btn {
+  margin-top: var(--spacing-sm);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .image-with-text {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .image-with-text--reversed {
+    direction: ltr;
+  }
+
+  .image-with-text__content {
+    text-align: center;
+  }
+
+  .image-with-text__btn {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-with-text__heading {
+    font-size: var(--text-3xl);
+  }
+}
